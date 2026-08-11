@@ -6,7 +6,7 @@ Hi, I'm Erick — I put this repo together to show how I actually approach autom
 
 Cases 01-09 are built from synthetic data — no production files, no internal process names, nothing traceable to an employer. That said, none of these problems are made up. They're patterns I've actually run into at my previous companies, just rebuilt from scratch with fake numbers so I'm not sharing anything that isn't mine to share. Case 10 is different: it's a real app I built and shipped for a school, with the sensitive parts (Firebase config, real data) deliberately left out of the repo.
 
-**[Start here if you're reviewing this for a role](RECRUITER_START_HERE.md)** · [Resumen en español](README_ES.md) · [One-page PDF](assets/Erick_Zuniga_Automation_Analytics_Portfolio_OnePager.pdf)
+**[Start here if you're reviewing this for a role](RECRUITER_START_HERE.md)** · [Resumen en español](README_ES.md) · [One-page PDF](assets/Erick_Zuniga_Automation_Analytics_Portfolio_OnePager.pdf) [LinkedIn](https://www.linkedin.com/in/erick-zuniga-finance)
 
 ## What's in here
 
