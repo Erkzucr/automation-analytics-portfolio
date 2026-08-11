@@ -1,0 +1,24 @@
+# Sensitive/source materials never permitted
+*.xlsx
+*.xls
+*.xlsb
+*.yxdb
+*.hyper
+*.accdb
+*.parquet
+*.msg
+*.eml
+.env
+*.key
+*.pem
+credentials*
+secrets*
+raw-source/
+production-data/
+private/
+# Block workflows by default, allow only reviewed public demo
+*.yxmd
+*.yxmc
+*.yxwz
+*.yxzp
+!demo/alteryx-reconciliation-demo/Synthetic_Reconciliation_Demo.yxmd

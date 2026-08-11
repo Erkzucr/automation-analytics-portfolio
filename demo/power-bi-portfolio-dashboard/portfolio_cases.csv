@@ -1,0 +1,10 @@
+case_id,capability,complexity,demonstration_depth,documented_tests,data_classification,status
+CS01,Validation,Intermediate,5,7,Synthetic,Complete
+CS02,Harmonization,Intermediate,4,7,Synthetic,Complete
+CS03,Outputs,Intermediate,4,7,Synthetic,Complete
+CS04,Monitoring,Intermediate,4,7,Synthetic,Complete
+CS05,Reconciliation,Advanced,5,7,Synthetic,Complete
+CS06,Period Analysis,Intermediate,4,7,Synthetic,Complete
+CS07,Governance,Advanced,5,7,Synthetic,Complete
+CS08,Controls,Advanced,5,7,Synthetic,Complete
+CS09,Responsible AI,Intermediate,4,7,Synthetic,Complete

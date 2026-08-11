@@ -1,0 +1,3 @@
+record_id,match_status,difference,review_reason
+REC001,BOTH,0.0,WITHIN_TOLERANCE
+REC002,BOTH,2.0,WITHIN_TOLERANCE

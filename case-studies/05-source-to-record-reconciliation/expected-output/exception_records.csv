@@ -1,0 +1,3 @@
+record_id,period_key,dimension_a,dimension_b,category_code,value_amount,status_code
+REC00007,P04,DA003,DB002,CAT02,2345.31,REVIEW
+REC00014,P03,DA005,DB003,CAT03,4148.25,REVIEW

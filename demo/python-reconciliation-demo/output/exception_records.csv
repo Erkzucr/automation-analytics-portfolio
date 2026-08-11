@@ -1,0 +1,4 @@
+record_id,match_status,difference,review_reason
+REC003,BOTH,-70.0,VARIANCE
+REC004,ONLY_A,,UNMATCHED_B
+REC005,ONLY_B,,UNMATCHED_A

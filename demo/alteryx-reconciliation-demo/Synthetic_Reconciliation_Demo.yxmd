@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AlteryxDocument yxmdVer="2023.2" RunE2="T">
+  <Nodes>
+    <Node ToolID="1">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.TextInput.TextInput">
+        <Position x="54" y="174"/>
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <NumRows value="5"/>
+          <Fields>
+            <Field name="record_id"/>
+            <Field name="dimension_a"/>
+            <Field name="value_amount"/>
+          </Fields>
+          <Data>
+            <r>
+              <c>REC001</c>
+              <c>DA001</c>
+              <c>1000.00</c>
+            </r>
+            <r>
+              <c>REC002</c>
+              <c>DA002</c>
+              <c>1500.00</c>
+            </r>
+            <r>
+              <c>REC003</c>
+              <c>DA003</c>
+              <c>750.00</c>
+            </r>
+            <r>
+              <c>REC004</c>
+              <c>DA004</c>
+              <c>2250.00</c>
+            </r>
+            <r>
+              <c>REC005</c>
+              <c>DA005</c>
+              <c>300.00</c>
+            </r>
+          </Data>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name/>
+          <DefaultAnnotationText>Synthetic Source A - embedded synthetic records</DefaultAnnotationText>
+          <Left value="False"/>
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextInput"/>
+    </Node>
+    <Node ToolID="2">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.TextInput.TextInput">
+        <Position x="54" y="330"/>
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <NumRows value="5"/>
+          <Fields>
+            <Field name="record_id"/>
+            <Field name="dimension_a"/>
+            <Field name="value_amount"/>
+          </Fields>
+          <Data>
+            <r>
+              <c>REC001</c>
+              <c>DA001</c>
+              <c>1000.00</c>
+            </r>
+            <r>
+              <c>REC002</c>
+              <c>DA002</c>
+              <c>1498.00</c>
+            </r>
+            <r>
+              <c>REC003</c>
+              <c>DA003</c>
+              <c>820.00</c>
+            </r>
+            <r>
+              <c>REC006</c>
+              <c>DA006</c>
+              <c>400.00</c>
+            </r>
+            <r>
+              <c>REC005</c>
+              <c>DA005</c>
+              <c>300.00</c>
+            </r>
+          </Data>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name/>
+          <DefaultAnnotationText>Synthetic Source B - embedded synthetic records</DefaultAnnotationText>
+          <Left value="False"/>
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextInput"/>
+    </Node>
+    <Node ToolID="3">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
+        <Position x="270" y="246"/>
+      </GuiSettings>
+      <Properties>
+        <Configuration joinByRecordPos="False">
+          <JoinInfo connection="Left">
+            <Field field="record_id"/>
+          </JoinInfo>
+          <JoinInfo connection="Right">
+            <Field field="record_id"/>
+          </JoinInfo>
+          <SelectConfiguration>
+            <Configuration outputConnection="Join">
+              <OrderChanged value="False"/>
+              <CommaDecimal value="False"/>
+              <SelectFields>
+                <SelectField field="Left_record_id" selected="True" rename="record_id" input="Left_"/>
+                <SelectField field="Left_dimension_a" selected="True" rename="dimension_a" input="Left_"/>
+                <SelectField field="Left_value_amount" selected="True" rename="source_a_amount" input="Left_"/>
+                <SelectField field="Right_dimension_a" selected="True" rename="right_dimension_a" input="Right_"/>
+                <SelectField field="Right_value_amount" selected="True" rename="source_b_amount" input="Right_"/>
+                <SelectField field="*Unknown" selected="False"/>
+              </SelectFields>
+            </Configuration>
+          </SelectConfiguration>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name/>
+          <DefaultAnnotationText>Full outer reconciliation using synthetic record_id</DefaultAnnotationText>
+          <Left value="False"/>
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin"/>
+    </Node>
+    <Node ToolID="4">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="462" y="246"/>
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="ToNumber([source_a_amount]) - ToNumber([source_b_amount])" field="difference" size="8" type="Double"/>
+            <FormulaField expression="Abs([difference])" field="absolute_difference" size="8" type="Double"/>
+            <FormulaField expression="IIF([absolute_difference] &lt;= 5, &quot;ACCEPTED&quot;, &quot;REVIEW&quot;)" field="review_status" size="20" type="V_String"/>
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name/>
+          <DefaultAnnotationText>Difference, absolute difference, and synthetic review status</DefaultAnnotationText>
+          <Left value="False"/>
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula"/>
+    </Node>
+    <Node ToolID="5">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="654" y="246"/>
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Mode>Custom</Mode>
+          <Expression>[absolute_difference] &lt;= 5</Expression>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name/>
+          <DefaultAnnotationText>Accepted when absolute difference is within demo tolerance of 5</DefaultAnnotationText>
+          <Left value="False"/>
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter"/>
+    </Node>
+    <Node ToolID="6">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
+        <Position x="846" y="198"/>
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <TempFile value=""/>
+          <TempFileDataProfiling value="False"/>
+          <Layout/>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name/>
+          <DefaultAnnotationText>ACCEPTED - matched and within synthetic tolerance</DefaultAnnotationText>
+          <Left value="False"/>
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxBrowseV2"/>
+    </Node>
+    <Node ToolID="7">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
+        <Position x="846" y="294"/>
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <TempFile value=""/>
+          <TempFileDataProfiling value="False"/>
+          <Layout/>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name/>
+          <DefaultAnnotationText>REVIEW - matched but above synthetic tolerance</DefaultAnnotationText>
+          <Left value="False"/>
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxBrowseV2"/>
+    </Node>
+    <Node ToolID="8">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
+        <Position x="462" y="102"/>
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <TempFile value=""/>
+          <TempFileDataProfiling value="False"/>
+          <Layout/>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name/>
+          <DefaultAnnotationText>UNMATCHED - Source A only</DefaultAnnotationText>
+          <Left value="False"/>
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxBrowseV2"/>
+    </Node>
+    <Node ToolID="9">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
+        <Position x="462" y="390"/>
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <TempFile value=""/>
+          <TempFileDataProfiling value="False"/>
+          <Layout/>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name/>
+          <DefaultAnnotationText>UNMATCHED - Source B only</DefaultAnnotationText>
+          <Left value="False"/>
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxBrowseV2"/>
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="1" Connection="Output"/>
+      <Destination ToolID="3" Connection="Left"/>
+    </Connection>
+    <Connection>
+      <Origin ToolID="2" Connection="Output"/>
+      <Destination ToolID="3" Connection="Right"/>
+    </Connection>
+    <Connection>
+      <Origin ToolID="3" Connection="Join"/>
+      <Destination ToolID="4" Connection="Input"/>
+    </Connection>
+    <Connection>
+      <Origin ToolID="4" Connection="Output"/>
+      <Destination ToolID="5" Connection="Input"/>
+    </Connection>
+    <Connection>
+      <Origin ToolID="5" Connection="True"/>
+      <Destination ToolID="6" Connection="Input"/>
+    </Connection>
+    <Connection>
+      <Origin ToolID="5" Connection="False"/>
+      <Destination ToolID="7" Connection="Input"/>
+    </Connection>
+    <Connection>
+      <Origin ToolID="3" Connection="Left"/>
+      <Destination ToolID="8" Connection="Input"/>
+    </Connection>
+    <Connection>
+      <Origin ToolID="3" Connection="Right"/>
+      <Destination ToolID="9" Connection="Input"/>
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True"/>
+    <GlobalRecordLimit value="0"/>
+    <TempFiles default="True"/>
+    <Annotation on="True" includeToolName="False"/>
+    <ConvErrorLimit value="10"/>
+    <ConvErrorLimit_Stop value="False"/>
+    <CancelOnError value="False"/>
+    <DisableBrowse value="False"/>
+    <EnablePerformanceProfiling value="False"/>
+    <RunWithE2 value="True"/>
+    <PredictiveToolsCodePage value="1252"/>
+    <DisableAllOutput value="False"/>
+    <ShowAllMacroMessages value="False"/>
+    <ShowConnectionStatusIsOn value="True"/>
+    <ShowConnectionStatusOnlyWhenRunning value="True"/>
+    <ZoomLevel value="0"/>
+    <LayoutType>Horizontal</LayoutType>
+    <MetaInfo>
+      <NameIsFileName value="True"/>
+      <Name>Synthetic_Reconciliation_Demo</Name>
+      <Description>Public-safe demonstration using embedded synthetic records only.</Description>
+      <RootToolName/>
+      <ToolVersion/>
+      <ToolInDb value="False"/>
+      <CategoryName>Portfolio Demo</CategoryName>
+      <SearchTags>synthetic,reconciliation,data-quality</SearchTags>
+      <Author>Erick Zuniga</Author>
+      <Company/>
+      <Copyright/>
+      <DescriptionLink actual="" displayed=""/>
+      <Example>
+        <Description/>
+        <File/>
+      </Example>
+      <WorkflowId value="e6db18d7-bf1e-4c4c-b3e4-9428ba0cdfbd"/>
+      <PlatformWorkflowId value=""/>
+    </MetaInfo>
+    <Events>
+      <Enabled value="True"/>
+    </Events>
+  </Properties>
+</AlteryxDocument>
