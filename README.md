@@ -1,6 +1,6 @@
 # Automation & Analytics Portfolio
 
-[![Python demo tests](https://github.com/REPLACE_WITH_GITHUB_USERNAME/automation-analytics-portfolio/actions/workflows/python-tests.yml/badge.svg)](https://github.com/REPLACE_WITH_GITHUB_USERNAME/automation-analytics-portfolio/actions/workflows/python-tests.yml)
+[![Python demo tests](https://github.com/Erkzucr/automation-analytics-portfolio/actions/workflows/python-tests.yml/badge.svg)](https://github.com/REPLACE_WITH_GITHUB_USERNAME/automation-analytics-portfolio/actions/workflows/python-tests.yml)
 
 Hi, I'm Erick — I put this repo together to show how I actually approach automation and reconciliation work, without leaning on anything from a real employer.
 
