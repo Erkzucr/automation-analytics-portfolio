@@ -1,6 +1,6 @@
 # Automation & Analytics Portfolio
 
-[![Python demo tests](https://github.com/Erkzucr/automation-analytics-portfolio/actions/workflows/python-tests.yml/badge.svg)](https://github.com/Erkzucr/automation-analytics-portfolio/actions/workflows/python-tests.yml)
+[![Python demo tests](https://github.com/REPLACE_WITH_GITHUB_USERNAME/automation-analytics-portfolio/actions/workflows/python-tests.yml/badge.svg)](https://github.com/REPLACE_WITH_GITHUB_USERNAME/automation-analytics-portfolio/actions/workflows/python-tests.yml)
 
 Hi, I'm Erick — I put this repo together to show how I actually approach automation and reconciliation work, without leaning on anything from a real employer.
 
@@ -21,6 +21,8 @@ python -m unittest discover -s tests -v
 ```
 
 And an Alteryx workflow at `demo/alteryx-reconciliation-demo/Synthetic_Reconciliation_Demo.yxmd` — open it and run it, it only touches the synthetic data bundled alongside it.
+
+There's also a [3-page Power BI dashboard](demo/power-bi-portfolio-dashboard/README.md) built on this portfolio's own metadata, with rendered screenshots and everything needed to rebuild it yourself.
 
 ## Case studies
 
