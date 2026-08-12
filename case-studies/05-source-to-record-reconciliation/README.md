@@ -2,6 +2,15 @@
 
 Reconciliation is where a lot of "automation" projects fall apart, because the real work isn't the match, it's deciding what to do with everything that doesn't match cleanly. This one goes deeper into that logic than the other case studies.
 
+## Business impact
+
+This control turns a manual validation process (2–4 hours per run, with
+errors that surface late) into a systematic check that takes minutes. It
+gives the business owner or department lead certainty that no number reaches
+a report without being reconciled, with every exception documented and
+traceable. In other words: not just faster, but more reliable and less
+dependent on any one person.
+
 ## The core problem
 
 Two independently generated datasets rarely agree perfectly, even when they're supposed to represent the same thing. Identifiers get formatted differently, precision varies, signs flip, and one side has records the other doesn't. A reconciliation that only handles the matched rows isn't really a reconciliation.
