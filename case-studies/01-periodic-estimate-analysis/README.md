@@ -2,6 +2,15 @@
 
 Every close cycle has some kind of recurring estimate that gets rebuilt from scratch each period, usually from two or three files that don't quite agree on formatting. I built this case study to show how I'd turn that into a controlled, repeatable workflow instead of a spreadsheet someone rebuilds by hand every month.
 
+## Business impact
+
+This turns an estimate that's normally rebuilt by hand every close — vulnerable
+to formatting drift nobody catches until review — into a workflow that validates
+input before anything gets calculated. For the department lead, that means no
+longer wondering whether this month's estimate "was done right": bad input gets
+isolated and logged before it ever reaches the calculation, not discovered after
+the fact.
+
 ## The problem
 
 Recurring estimates tend to break down for a boring reason: source files drift. A field gets renamed, a reference table misses a row, someone fat-fingers a status code, and now the estimate is wrong and nobody notices until review. The fix isn't smarter formulas, it's putting real validation in front of the calculation so bad input never reaches it silently.
