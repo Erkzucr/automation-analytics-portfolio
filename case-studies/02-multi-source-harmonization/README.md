@@ -6,6 +6,14 @@ The tricky part of combining data from different sources is rarely the joining i
 
 Comparable records coming from multiple inputs, but with inconsistent naming, formats, periods, and status conventions. Before you can do anything useful with combined data, you need every source mapped to one canonical shape, and you need to know where each record came from in case something looks wrong later.
 
+## Business impact
+
+Instead of someone manually reconciling what the same field is called across
+systems, every source gets mapped to one canonical shape with source lineage
+kept on every row. When a total looks off, "where did this number come from"
+gets answered in seconds by tracing the row back to its source — not by an
+afternoon spent cross-referencing spreadsheets.
+
 ## The approach
 
 Map each source to a common schema first, before any comparison happens. Validate periods so you're not accidentally comparing apples to a stale reference month. Deduplicate on the canonical key. And keep source lineage on every row, because "where did this number come from" is the first question anyone asks when a total looks off.
