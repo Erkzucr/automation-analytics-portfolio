@@ -2,6 +2,14 @@
 
 Calculations don't stay static. Rates change, thresholds get revised, policies get updated mid-year, and if the logic isn't versioned, you eventually lose track of which rule applied to which period. This case study is about governing that change instead of hardcoding it.
 
+## Business impact
+
+When calculation logic lives in a versioned table instead of someone's memory
+or a buried formula, the business gets something rare: an answer to "why did
+this come out this way" six months later, even after the rule has changed
+twice since. That's continuity that survives a role change, a leave of
+absence, or someone leaving the company entirely.
+
 ## Business problem
 
 When rules, assumptions, and approvals for a recurring calculation live in different places, or worse, in someone's memory, the calculation becomes impossible to audit after the fact. You can't answer "why did this come out this way" six months later if the rule that produced it already changed twice since then.
