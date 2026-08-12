@@ -2,6 +2,15 @@
 
 This one's a bit different from the rest, it's about using AI as part of the documentation process itself, and being explicit about where the human review sits.
 
+## Business impact
+
+Process knowledge that lives only in one person's head is a real business
+risk — interview two people about the same process and you'll get two
+different pictures. Using AI to draft a first pass, verified line by line
+against source before anyone trusts it, cuts that key-person risk and speeds
+up handoff whenever someone changes roles — exactly the kind of continuity a
+team lead cares about.
+
 ## Why this matters
 
 Process knowledge usually lives in someone's head and gets written down inconsistently, if at all. Interview one person about how a process works and you get a narrative; interview another and you get a bullet list missing half the exceptions. AI can help draft a consistent writeup fast, but only if the draft gets checked against the actual source material before anyone trusts it.
