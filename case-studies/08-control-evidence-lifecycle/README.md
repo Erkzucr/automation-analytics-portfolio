@@ -2,6 +2,14 @@
 
 A control that runs but leaves no evidence behind is functionally the same as no control at all, at least from an auditor's perspective. This case study is about closing that gap: making sure execution, exceptions, remediation, and sign-off are all captured somewhere a reviewer can actually find them later.
 
+## Business impact
+
+Instead of assembling evidence under audit pressure — screenshots pulled
+together at the last minute from three different places — evidence is a
+natural byproduct of the process itself. For internal or external audit, that
+means a documented, traceable trail that's already there, with remediation
+tracked until it's genuinely closed instead of resetting every period.
+
 ## Business problem
 
 Controls tend to get evidenced piecemeal, ownership in one tracker, review criteria in a policy doc, exceptions in an email thread, retention rules nobody remembers until an audit asks. By the time someone needs to reconstruct what happened, half the trail is gone.
