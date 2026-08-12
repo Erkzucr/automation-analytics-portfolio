@@ -2,13 +2,17 @@
 
 A control that runs but leaves no evidence behind is functionally the same as no control at all, at least from an auditor's perspective. This case study is about closing that gap: making sure execution, exceptions, remediation, and sign-off are all captured somewhere a reviewer can actually find them later.
 
-## Business problem
+## What this really solves
 
-Controls tend to get evidenced piecemeal, ownership in one tracker, review criteria in a policy doc, exceptions in an email thread, retention rules nobody remembers until an audit asks. By the time someone needs to reconstruct what happened, half the trail is gone.
+When audit evidence lives in three different places — a tracker, an email thread, someone's memory — reconstructing what actually happened takes far longer than it should, usually right when an auditor is already asking for it.
 
-## Generalized solution
+## Business impact
 
-Define roles and evidence requirements up front, review execution against those requirements, track remediation on anything that fails, and compile a certification status that rolls everything up into one place.
+Evidence gets created as a natural part of doing the work, not scrambled together afterward. Audits move faster, and issues get tracked until they're genuinely resolved instead of quietly resetting every period.
+
+## How it works
+
+Controls tend to get evidenced piecemeal: ownership in one tracker, review criteria in a policy doc, exceptions in an email thread, retention rules nobody remembers until an audit asks. By the time someone needs to reconstruct what happened, half the trail is gone. The approach: define roles and evidence requirements up front, review execution against those requirements, track remediation on anything that fails, and compile a certification status that rolls everything up into one place.
 
 ```mermaid
 flowchart TB
@@ -31,7 +35,7 @@ flowchart TB
  K --> J
 ```
 
-## Process walkthrough
+## Steps
 
 1. Load control execution data and the reference control catalog.
 2. Validate schema, required fields, and unique keys.
@@ -41,7 +45,7 @@ flowchart TB
 6. Build the certification summary and supporting detail.
 7. Reconcile summary to accepted detail.
 
-## Controls demonstrated
+## Controls
 
 - Required-field and duplicate-key validation on execution records
 - Reference completeness against the control catalog

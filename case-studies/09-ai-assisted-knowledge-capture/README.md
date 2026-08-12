@@ -2,13 +2,17 @@
 
 This one's a bit different from the rest, it's about using AI as part of the documentation process itself, and being explicit about where the human review sits.
 
-## Why this matters
+## What this really solves
 
-Process knowledge usually lives in someone's head and gets written down inconsistently, if at all. Interview one person about how a process works and you get a narrative; interview another and you get a bullet list missing half the exceptions. AI can help draft a consistent writeup fast, but only if the draft gets checked against the actual source material before anyone trusts it.
+When only one person really understands how a process works, that knowledge is one resignation away from disappearing. Ask two different people to explain the same process and you'll usually get two different answers — one gives you a narrative, the other a bullet list missing half the exceptions.
 
-## How I set it up
+## Business impact
 
-Start from a synthetic transcript, draft a writeup using a standard prompt, then verify the draft against the source line by line rather than taking it at face value. A human reviews it, and the final version gets versioned so you can see what changed between drafts. The AI drafts; it doesn't get the last word.
+Using AI to draft documentation — always checked against the real source before anyone trusts it — makes process knowledge less dependent on any single person, so handoffs and transitions don't start from zero.
+
+## How it works
+
+AI can help draft a consistent writeup fast, but only if the draft gets checked against the actual source material before anyone trusts it. The approach: start from a synthetic transcript, draft a writeup using a standard prompt, then verify the draft against the source line by line rather than taking it at face value. A human reviews it, and the final version gets versioned so you can see what changed between drafts. The AI drafts; it doesn't get the last word.
 
 ```mermaid
 flowchart TB
@@ -31,7 +35,7 @@ flowchart TB
  K --> J
 ```
 
-## Process walkthrough
+## Steps
 
 1. Load the synthetic transcript and reference material.
 2. Validate schema and completeness of the source content.
@@ -41,7 +45,7 @@ flowchart TB
 6. Produce the reviewed summary and supporting detail.
 7. Reconcile the final version back to what was actually verified.
 
-## Controls demonstrated
+## Controls
 
 - Source completeness checks before drafting starts
 - Line-by-line verification of AI-drafted content against source

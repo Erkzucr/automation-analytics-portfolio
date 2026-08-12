@@ -2,13 +2,17 @@
 
 Turning detailed transaction-level records into a clean, balanced summary that still lets a reviewer drill back to the source rows.
 
-## Problem
+## What this really solves
 
-Detail data is messy by nature: mixed signs, inconsistent precision, records that don't map cleanly to a reporting dimension. Producing an output that's actually reviewable means fixing all of that first, not just aggregating and hoping it nets out.
+Turning messy, detailed transaction data into a clean summary that still adds up correctly — without hiding a rounding mismatch in a footnote nobody reads.
 
-## Solution
+## Business impact
 
-Normalize signs and rounding, assign each record to its reporting dimension, aggregate, and then check that the aggregate balances before publishing it. If it doesn't balance, that's a control exception, not a rounding footnote buried in a comment.
+Nothing gets published unless it's been checked to actually tie out. That means a leader can trust a summary number is accurate, not just "close enough," because the detail behind it was verified before it ever went out.
+
+## How it works
+
+Detail data is messy by nature: mixed signs, inconsistent precision, records that don't map cleanly to a reporting dimension. Producing an output that's actually reviewable means fixing all of that first, not just aggregating and hoping it nets out. The approach: normalize signs and rounding, assign each record to its reporting dimension, aggregate, and then check that the aggregate balances before publishing it. If it doesn't balance, that's a control exception, not a rounding footnote buried in a comment.
 
 ```mermaid
 flowchart TB

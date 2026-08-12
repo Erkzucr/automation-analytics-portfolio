@@ -2,6 +2,14 @@
 
 A small React app I built to solve a real, unglamorous problem: a school kept track of its musical instruments and supplies in a spreadsheet that only one person could edit at a time, with no history of what got repaired or when. This replaces that with a shared web app that any coordinator can update, with a running repair/maintenance log per item.
 
+## What this really solves
+
+A school was tracking instruments and supplies in a spreadsheet only one person could edit at a time, with no record of what had ever actually been repaired.
+
+## Business impact
+
+Now anyone on the team can update it safely, and there's a real history behind every item — the difference between "we think we still have that" and knowing for sure.
+
 ## What it does
 
 - Lists instruments and supplies with quantity, location, status (good / needs repair / out of service), and who they're assigned to

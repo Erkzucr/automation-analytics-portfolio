@@ -2,9 +2,13 @@
 
 Every close cycle has some kind of recurring estimate that gets rebuilt from scratch each period, usually from two or three files that don't quite agree on formatting. I built this case study to show how I'd turn that into a controlled, repeatable workflow instead of a spreadsheet someone rebuilds by hand every month.
 
-## The problem
+## What this really solves
 
-Recurring estimates tend to break down for a boring reason: source files drift. A field gets renamed, a reference table misses a row, someone fat-fingers a status code, and now the estimate is wrong and nobody notices until review. The fix isn't smarter formulas, it's putting real validation in front of the calculation so bad input never reaches it silently.
+Every closing period, someone has to rebuild a recurring estimate from two or three files that never quite agree. When those files drift — a renamed field, a missing row, a typo in a status code — the mistake usually isn't caught until someone's already working off the wrong number.
+
+## Business impact
+
+This catches bad data before it becomes a bad number. Leadership gets an estimate they can trust without double-checking it every month, and the process doesn't depend on one specific person remembering to look closely.
 
 ## How it works
 
@@ -31,7 +35,7 @@ flowchart TB
  K --> J
 ```
 
-## Walking through it
+## Steps
 
 1. Load the source and reference data.
 2. Check schema, required fields, and duplicate keys.
@@ -41,7 +45,7 @@ flowchart TB
 6. Build the summary and supporting detail.
 7. Tie the summary back to the accepted detail before publishing anything.
 
-## What's actually being controlled
+## Controls
 
 - Required fields and duplicate keys get caught before they touch the calculation
 - Reference data is checked for completeness, not just existence

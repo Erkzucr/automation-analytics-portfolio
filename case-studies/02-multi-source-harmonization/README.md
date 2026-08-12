@@ -2,11 +2,15 @@
 
 The tricky part of combining data from different sources is rarely the joining itself, it's that "the same thing" gets called something different in every system. One source uses a three-letter code, another spells it out, a third leaves it blank and expects you to infer it from context. This case study works through how I'd handle that kind of mismatch in a way that's actually auditable.
 
-## What I was solving for
+## What this really solves
 
-Comparable records coming from multiple inputs, but with inconsistent naming, formats, periods, and status conventions. Before you can do anything useful with combined data, you need every source mapped to one canonical shape, and you need to know where each record came from in case something looks wrong later.
+Different systems call the same thing by different names — one uses a code, another spells it out, a third just leaves it blank. Before you can actually compare numbers from different sources, you have to agree on what they mean in the first place.
 
-## The approach
+## Business impact
+
+When two numbers don't match, whoever's reviewing them can trace exactly where each one came from in minutes, not an afternoon of cross-referencing spreadsheets — which is exactly what matters when someone's asking "why doesn't this add up."
+
+## How it works
 
 Map each source to a common schema first, before any comparison happens. Validate periods so you're not accidentally comparing apples to a stale reference month. Deduplicate on the canonical key. And keep source lineage on every row, because "where did this number come from" is the first question anyone asks when a total looks off.
 
@@ -31,7 +35,7 @@ flowchart TB
  K --> J
 ```
 
-## Process, step by step
+## Steps
 
 1. Load source and reference data.
 2. Validate schema, required fields, and unique keys per source.
@@ -41,7 +45,7 @@ flowchart TB
 6. Produce the summary and supporting detail.
 7. Reconcile the summary back to accepted detail.
 
-## Controls built into the process
+## Controls
 
 - Required-field and duplicate-key checks per source, before merging
 - Reference completeness checks so nothing gets silently mapped to nothing

@@ -2,13 +2,17 @@
 
 Reconciliation is where a lot of "automation" projects fall apart, because the real work isn't the match, it's deciding what to do with everything that doesn't match cleanly. This one goes deeper into that logic than the other case studies.
 
-## The core problem
+## What this really solves
 
-Two independently generated datasets rarely agree perfectly, even when they're supposed to represent the same thing. Identifiers get formatted differently, precision varies, signs flip, and one side has records the other doesn't. A reconciliation that only handles the matched rows isn't really a reconciliation.
+Two sets of records that are supposed to match almost never do perfectly — one has entries the other doesn't, formats differ, numbers round differently. Most "reconciliations" only handle the easy matches and quietly drop the rest.
 
-## How I approached it
+## Business impact
 
-Standardize both sides first so you're not comparing apples to oranges on formatting alone. Then do a full outer match, not an inner join, so unmatched records on either side stay visible instead of silently vanishing. Calculate differences on anything that does match. Classify everything else, missing-from-source, missing-from-record, timing difference, or genuine break, and route it into review accordingly.
+This converts a manual validation process (2–4 hours per run, with errors that surface late) into a systematic check that takes minutes. It gives the business owner or department lead certainty that no number reaches a report without being reconciled, with every exception documented and traceable — not just faster, but more reliable and less dependent on any one person.
+
+## How it works
+
+Two independently generated datasets rarely agree perfectly, even when they're supposed to represent the same thing. Identifiers get formatted differently, precision varies, signs flip, and one side has records the other doesn't. A reconciliation that only handles the matched rows isn't really a reconciliation. The approach: standardize both sides first so you're not comparing apples to oranges on formatting alone. Then do a full outer match, not an inner join, so unmatched records on either side stay visible instead of silently vanishing. Calculate differences on anything that does match. Classify everything else — missing-from-source, missing-from-record, timing difference, or genuine break — and route it into review accordingly.
 
 ```mermaid
 flowchart TB
@@ -31,7 +35,7 @@ flowchart TB
  K --> J
 ```
 
-## Process walkthrough
+## Steps
 
 1. Load both datasets and the reference data.
 2. Validate schema, required fields, and unique keys on each side independently.
@@ -41,7 +45,7 @@ flowchart TB
 6. Build the summary and supporting detail.
 7. Tie the summary back to the accepted detail.
 
-## Controls demonstrated
+## Controls
 
 - Independent validation of both source datasets before matching
 - Full outer match, so unmatched populations on either side stay visible instead of getting dropped by an inner join

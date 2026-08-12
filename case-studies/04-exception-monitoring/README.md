@@ -2,11 +2,15 @@
 
 Having an exception report is one thing. Having one that tells the right person what to look at first is another. This case study is about the second part.
 
-## Business problem
+## What this really solves
 
-A pile of unresolved items isn't useful if nobody knows who owns each one, how old it is, or which ones actually matter. I've seen review queues where "exceptions" just meant a spreadsheet tab nobody opened until quarter-end. That's the failure mode I designed against here.
+Having a list of problems isn't the same as knowing which ones need attention right now. Plenty of "exception reports" are really just a spreadsheet tab nobody opens until it's too late to fix quietly. A pile of unresolved items isn't useful if nobody knows who owns each one, how old it is, or which ones actually matter.
 
-## What I built
+## Business impact
+
+This turns a pile of unresolved items into a ranked list, so the team's time goes to what actually matters first, instead of getting lost figuring out where to even start.
+
+## How it works
 
 Validated records get routed through an ownership assignment step and an age-banding calculation, and the result is a prioritized view instead of a flat list. New, unassigned, and aged-out items surface differently, so review effort goes where it's actually needed.
 
@@ -31,7 +35,7 @@ flowchart TB
  K --> J
 ```
 
-## Process walkthrough
+## Steps
 
 1. Load source and reference data.
 2. Validate schema, required fields, and unique keys.
@@ -41,7 +45,7 @@ flowchart TB
 6. Build the prioritized monitoring view and supporting detail.
 7. Reconcile the summary back to detail.
 
-## Controls demonstrated
+## Controls
 
 - Required-field and duplicate-key validation
 - Reference completeness checks so ownership assignment doesn't fail silently
