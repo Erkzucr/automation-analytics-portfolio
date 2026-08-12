@@ -2,6 +2,14 @@
 
 What changed since last period, and does the change actually make sense? That's the question this workflow is built to answer without someone eyeballing two spreadsheets side by side.
 
+## Business impact
+
+Comparing this period to last shouldn't depend on whoever happens to be doing
+the review that month noticing what's off. Flagging movements against a
+threshold means a real variance surfaces before it becomes a surprise in the
+report, instead of after — which is exactly when a controller needs to know
+about it.
+
 ## Business problem
 
 Recurring outputs need a current-versus-prior comparison almost every cycle, but doing that comparison by hand means someone has to notice which movements are normal and which ones deserve a second look. That judgment call shouldn't depend on who happens to be doing the review that month.
