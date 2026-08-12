@@ -2,6 +2,13 @@
 
 Turning detailed transaction-level records into a clean, balanced summary that still lets a reviewer drill back to the source rows.
 
+## Business impact
+
+Rather than trusting that an aggregate "probably nets out," the summary is
+tied back to the accepted detail before it's allowed to publish. That's the
+difference between hoping a number is right and knowing it: nothing goes out
+the door that can't be traced line by line back to its source.
+
 ## Problem
 
 Detail data is messy by nature: mixed signs, inconsistent precision, records that don't map cleanly to a reporting dimension. Producing an output that's actually reviewable means fixing all of that first, not just aggregating and hoping it nets out.
