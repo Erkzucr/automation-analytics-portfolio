@@ -2,6 +2,14 @@
 
 Having an exception report is one thing. Having one that tells the right person what to look at first is another. This case study is about the second part.
 
+## Business impact
+
+A flat list of exceptions is easy to ignore until it's a quarter-end fire
+drill. Routing every exception through ownership assignment and age-banding
+turns that pile into a prioritized queue, so review time goes to what's
+actually urgent instead of getting lost in noise nobody had time to sort
+through.
+
 ## Business problem
 
 A pile of unresolved items isn't useful if nobody knows who owns each one, how old it is, or which ones actually matter. I've seen review queues where "exceptions" just meant a spreadsheet tab nobody opened until quarter-end. That's the failure mode I designed against here.
