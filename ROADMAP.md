@@ -4,7 +4,7 @@ Done: thirteen case studies at depth 5 on the written rubric, the shared case pi
 
 Probably next, in this order:
 
-- Refresh the Power BI screenshots. The data and spec already cover thirteen cases; the images still show nine.
+- Rebuild the .pbix locally from the spec now that the data covers thirteen cases; the page renders are current.
 - A second Power Automate flow for the agent that logs questions the SOPs don't answer, so the gap list builds itself.
 - A UiPath or Power Automate Desktop demo, once there is something worth showing.
 

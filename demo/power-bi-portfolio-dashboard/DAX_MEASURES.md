@@ -13,7 +13,9 @@ CALCULATE(
 
 Total Documented Tests = SUM(portfolio_cases[documented_tests])
 
-Executable Demos = DISTINCTCOUNT(demo_execution[technology])
+Executable Demo Technologies = DISTINCTCOUNT(demo_execution[technology])
+
+Executable Demos = COUNTROWS(demo_execution)
 
 Total Accepted Records = SUM(demo_execution[accepted_count])
 

@@ -1,20 +1,20 @@
 # Dashboard Specification
 
 ## Page 1: Executive Overview
-- Cards: Total Case Studies, Executable Demos, Total Documented Tests, Advanced Case Studies
-- Horizontal bar chart: capability by demonstration depth
-- Donut chart: case studies by complexity
+- Cards: Total Case Studies, Executable Demo Technologies, Total Documented Tests, Advanced Case Studies
+- Horizontal bar chart: documented tests by capability, colored by complexity (depth is 5 across the board, so tests are the axis with information)
+- Donut chart: case studies by complexity (Intermediate, Advanced, Applied)
 - Slicer: capability
 - Text callout: Synthetic data only
 
 ## Page 2: Case Study Explorer
-- Matrix: case ID, capability, complexity, depth, tests, status
+- Matrix: case ID, capability, complexity, depth, tests, data classification, status
 - Conditional formatting on demonstration depth
 - Slicers: complexity, capability, status
 - Tooltip: data classification
 
 ## Page 3: Executable Demo Results
-- Clustered column chart: accepted vs exception count by technology
+- Clustered column chart: accepted vs exception count by demo
 - Cards: Total Accepted Records, Total Exception Records, Exception Rate
 - Table: demo name, technology, test status, data classification
 - Slicer: technology
