@@ -1,24 +1,18 @@
 # Architecture
 
-Standalone copy of the flow diagram from the README, for quick reference.
-
 ```mermaid
-flowchart TB
- A1[Synthetic source A] --> B[Schema and completeness checks]
- A2[Synthetic reference data] --> B
- B --> C{Valid input?}
- C -- No --> X1[Input exception]
- C -- Yes --> D[Standardize generic fields]
- D --> E[Apply Data harmonization logic]
- E --> F{Review required?}
- F -- Yes --> X2[Review exception]
- F -- No --> G[Accepted detail]
- G --> H[Create summary output]
- H --> I{Control totals agree?}
- I -- No --> X3[Control exception]
- I -- Yes --> J[Publish summary and support]
- X1 --> K[Unified exception register]
- X2 --> K
- X3 --> K
- K --> J
+flowchart LR
+ S1[Source A: coded values] --> V1[Validate A]
+ S2[Source B: spelled-out values, some blank] --> V2[Validate B]
+ V1 --> N[Standardize: trim, upper-case, two decimals]
+ V2 --> N
+ M[Harmonization map: dimensions and allowed periods] --> N
+ N --> D{Dimension in map and active?}
+ D -- No --> X[Exception: UNMAPPED or INACTIVE]
+ D -- Yes --> P{Period in map?}
+ P -- No --> X2[Exception: UNKNOWN_PERIOD]
+ P -- Yes --> H[Harmonized rows, one schema]
+ H --> O[Summary and detail with counts from each source]
+ X --> O
+ X2 --> O
 ```

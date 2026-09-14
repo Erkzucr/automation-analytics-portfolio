@@ -16,23 +16,19 @@ After the common validation, each accepted row gets a priority band by amount, u
 
 ```mermaid
 flowchart TB
- A1[Synthetic source A] --> B[Schema and completeness checks]
- A2[Synthetic reference data] --> B
- B --> C{Valid input?}
- C -- No --> X1[Input exception]
- C -- Yes --> D[Standardize generic fields]
- D --> E[Apply Exception monitoring logic]
- E --> F{Review required?}
- F -- Yes --> X2[Review exception]
- F -- No --> G[Accepted detail]
- G --> H[Create summary output]
- H --> I{Control totals agree?}
- I -- No --> X3[Control exception]
- I -- Yes --> J[Publish summary and support]
- X1 --> K[Unified exception register]
- X2 --> K
- X3 --> K
- K --> J
+ I[Input rows] --> V[Validate and standardize]
+ V --> OK{Passes checks?}
+ OK -- No --> R[Exception register with reason code]
+ OK -- Yes --> B{Amount band}
+ B -- at or above high threshold --> H[Priority HIGH]
+ B -- at or above medium threshold --> M[Priority MEDIUM]
+ B -- below --> L[Priority LOW]
+ H --> Q[Review queue sorted by priority]
+ M --> Q
+ L --> Q
+ R --> C[Count by reason code]
+ C --> TR[Trend by reason, period over period]
+ Q --> OUT[Reviewer sees HIGH first]
 ```
 
 ## Steps

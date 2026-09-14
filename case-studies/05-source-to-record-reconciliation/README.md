@@ -16,23 +16,22 @@ Both sides are standardized first. The match is a full outer join, so unmatched 
 
 ```mermaid
 flowchart TB
- A1[Synthetic source A] --> B[Schema and completeness checks]
- A2[Synthetic reference data] --> B
- B --> C{Valid input?}
- C -- No --> X1[Input exception]
- C -- Yes --> D[Standardize generic fields]
- D --> E[Apply Reconciliation logic]
- E --> F{Review required?}
- F -- Yes --> X2[Review exception]
- F -- No --> G[Accepted detail]
- G --> H[Create summary output]
- H --> I{Control totals agree?}
- I -- No --> X3[Control exception]
- I -- Yes --> J[Publish summary and support]
- X1 --> K[Unified exception register]
- X2 --> K
- X3 --> K
- K --> J
+ A[Source records] --> SA[Standardize A]
+ B[Record-of-truth] --> SB[Standardize B]
+ SA --> J[Full outer match on key]
+ SB --> J
+ J --> MA{Present on both sides?}
+ MA -- Only in A --> XA[Unmatched: missing from record]
+ MA -- Only in B --> XB[Unmatched: missing from source]
+ MA -- Both --> DIF[Calculate difference]
+ DIF --> TOL{Within tolerance?}
+ TOL -- Yes --> OK[Matched and agreed]
+ TOL -- No --> BRK[Variance: timing or break]
+ XA --> REG[Exception register by classification]
+ XB --> REG
+ BRK --> REG
+ OK --> SUM[Summary ties to matched detail]
+ REG --> SUM
 ```
 
 ## Steps

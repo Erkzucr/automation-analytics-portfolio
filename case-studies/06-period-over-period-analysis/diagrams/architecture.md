@@ -2,21 +2,16 @@
 
 ```mermaid
 flowchart TB
- A1[Synthetic source A] --> B[Schema and completeness checks]
- A2[Synthetic reference data] --> B
- B --> C{Valid input?}
- C -- No --> X1[Input exception]
- C -- Yes --> D[Standardize generic fields]
- D --> E[Apply Movement analysis logic]
- E --> F{Review required?}
- F -- Yes --> X2[Review exception]
- F -- No --> G[Accepted detail]
- G --> H[Create summary output]
- H --> I{Control totals agree?}
- I -- No --> X3[Control exception]
- I -- Yes --> J[Publish summary and support]
- X1 --> K[Unified exception register]
- X2 --> K
- X3 --> K
- K --> J
+ I[Rows by dimension and period] --> V[Validate and standardize]
+ V --> T[Total by dimension and period]
+ T --> PR[Pair each period with the prior one]
+ PR --> MV[Movement = current total minus prior total]
+ MV --> TH{Absolute movement above threshold?}
+ TH -- Yes --> X[Exception: MOVEMENT_ABOVE_THRESHOLD, prior base attached]
+ TH -- No --> A[Accepted, movement amount carried on the row]
+ A --> S[Summary by period]
+ X --> S
+ S --> C{Tie-out passes?}
+ C -- Yes --> P[Flux report with explanations to write]
+ C -- No --> F[Stop]
 ```

@@ -16,23 +16,18 @@ Execution records go through the common validation and are checked against the c
 
 ```mermaid
 flowchart TB
- A1[Synthetic source A] --> B[Schema and completeness checks]
- A2[Synthetic reference data] --> B
- B --> C{Valid input?}
- C -- No --> X1[Input exception]
- C -- Yes --> D[Standardize generic fields]
- D --> E[Apply Control assurance logic]
- E --> F{Review required?}
- F -- Yes --> X2[Review exception]
- F -- No --> G[Accepted detail]
- G --> H[Create summary output]
- H --> I{Control totals agree?}
- I -- No --> X3[Control exception]
- I -- Yes --> J[Publish summary and support]
- X1 --> K[Unified exception register]
- X2 --> K
- X3 --> K
- K --> J
+ E[Control execution records] --> V[Validate: fields, keys, amounts]
+ CAT[Control catalog with status] --> CK
+ V --> CK{Control exists and is active in catalog?}
+ CK -- No --> X1[Exception: evidence against unknown or retired control]
+ CK -- Yes --> ST{Record flagged for review at source?}
+ ST -- Yes --> X2[Exception: remediation open]
+ ST -- No --> OK[Evidence accepted]
+ OK --> CERT[Certification summary]
+ X1 --> REG[Open items register]
+ X2 --> REG
+ REG --> NEXT[Carried forward to next period until closed]
+ REG --> CERT
 ```
 
 ## Steps

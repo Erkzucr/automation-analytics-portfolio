@@ -16,23 +16,18 @@ Common validation runs first. Accepted rows are aggregated. The summary carries 
 
 ```mermaid
 flowchart TB
- A1[Synthetic source A] --> B[Schema and completeness checks]
- A2[Synthetic reference data] --> B
- B --> C{Valid input?}
- C -- No --> X1[Input exception]
- C -- Yes --> D[Standardize generic fields]
- D --> E[Apply Structured output logic]
- E --> F{Review required?}
- F -- Yes --> X2[Review exception]
- F -- No --> G[Accepted detail]
- G --> H[Create summary output]
- H --> I{Control totals agree?}
- I -- No --> X3[Control exception]
- I -- Yes --> J[Publish summary and support]
- X1 --> K[Unified exception register]
- X2 --> K
- X3 --> K
- K --> J
+ D[Transaction detail] --> V[Validate and standardize]
+ V --> SPLIT{Row passes?}
+ SPLIT -- No --> X[Exception register]
+ SPLIT -- Yes --> AGG[Aggregate accepted rows by dimension]
+ AGG --> S[Summary: accepted total]
+ X --> E[Exception total]
+ S --> T1{Accepted + exceptions = input count?}
+ E --> T1
+ T1 -- No --> F[FAIL: do not publish]
+ T1 -- Yes --> T2{Accepted total + exception total = input total?}
+ T2 -- No --> F
+ T2 -- Yes --> PUB[Publish summary with drill-back to detail]
 ```
 
 ## Steps

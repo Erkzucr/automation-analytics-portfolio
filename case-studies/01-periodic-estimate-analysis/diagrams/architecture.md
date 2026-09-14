@@ -1,24 +1,20 @@
 # Architecture
 
-Same flow as the README diagram, kept here on its own so it's easy to link to directly.
-
 ```mermaid
 flowchart TB
- A1[Synthetic source A] --> B[Schema and completeness checks]
- A2[Synthetic reference data] --> B
- B --> C{Valid input?}
- C -- No --> X1[Input exception]
- C -- Yes --> D[Standardize generic fields]
- D --> E[Apply Calculation workflow logic]
- E --> F{Review required?}
- F -- Yes --> X2[Review exception]
- F -- No --> G[Accepted detail]
- G --> H[Create summary output]
- H --> I{Control totals agree?}
- I -- No --> X3[Control exception]
- I -- Yes --> J[Publish summary and support]
- X1 --> K[Unified exception register]
- X2 --> K
- X3 --> K
- K --> J
+ A[Primary file: estimate lines by period, dimension, category] --> V[Validate: required fields, unique key, numeric amount]
+ R[Reference: dimension status] --> L{Dimension active in reference?}
+ V --> V2{Valid?}
+ V2 -- No --> X[Exception register with reason]
+ V2 -- Yes --> S[Standardize codes and amounts]
+ S --> L
+ L -- No --> X
+ L -- Yes --> C{Amount above category ceiling?}
+ C -- Yes --> X
+ C -- No --> A2[Accepted estimate lines]
+ A2 --> SUM[Summary by period and category]
+ SUM --> T{Counts and totals tie to input?}
+ T -- No --> STOP[Stop: tie-out FAIL]
+ T -- Yes --> P[Publish estimate with exception list]
+ X --> P
 ```

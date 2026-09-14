@@ -15,24 +15,16 @@ Rules are in one file with a version. Anyone can read which rate applied to whic
 The policy table is in `case.json` as a rate per category. Accepted rows get their rate and a computed amount. A row whose category has no rate goes to the register with its own reason. Defaulting to zero or to the nearest rate would keep the process running and hide the missing policy.
 
 ```mermaid
-flowchart TB
- A1[Synthetic source A] --> B[Schema and completeness checks]
- A2[Synthetic reference data] --> B
- B --> C{Valid input?}
- C -- No --> X1[Input exception]
- C -- Yes --> D[Standardize generic fields]
- D --> E[Apply Rule governance logic]
- E --> F{Review required?}
- F -- Yes --> X2[Review exception]
- F -- No --> G[Accepted detail]
- G --> H[Create summary output]
- H --> I{Control totals agree?}
- I -- No --> X3[Control exception]
- I -- Yes --> J[Publish summary and support]
- X1 --> K[Unified exception register]
- X2 --> K
- X3 --> K
- K --> J
+flowchart LR
+ POL[Policy table in case.json: rate per category, versioned] --> LK
+ I[Input rows] --> V[Validate and standardize]
+ V --> LK{Rate exists for category?}
+ LK -- No --> X[Exception: NO_POLICY_FOR_CATEGORY]
+ LK -- Yes --> CALC[computed_amount = value × rate]
+ CALC --> A[Accepted rows with policy_rate and computed_amount]
+ A --> S[Summary]
+ X --> S
+ S --> AUD[Which rate applied in which period is answerable from the file]
 ```
 
 ## Steps
