@@ -1,18 +1,18 @@
 # Control Evidence and Assurance Lifecycle
 
-A control that runs but leaves no evidence behind is functionally the same as no control at all, at least from an auditor's perspective. This case study is about closing that gap: making sure execution, exceptions, remediation, and sign-off are all captured somewhere a reviewer can actually find them later.
+A control that runs and leaves no evidence is, for an auditor, the same as no control. This case captures execution, exceptions, remediation and sign-off in one register.
 
 ## What this really solves
 
-When audit evidence lives in three different places — a tracker, an email thread, someone's memory — reconstructing what actually happened takes far longer than it should, usually right when an auditor is already asking for it.
+Evidence spread across a tracker, an email thread and someone's memory takes too long to reconstruct, and the reconstruction always happens while the auditor is waiting.
 
 ## Business impact
 
-Evidence gets created as a natural part of doing the work, not scrambled together afterward. Audits move faster, and issues get tracked until they're genuinely resolved instead of quietly resetting every period.
+Evidence is produced as part of the work. Audit requests are answered from the register, and open items stay open until someone closes them.
 
 ## How it works
 
-Controls tend to get evidenced piecemeal: ownership in one tracker, review criteria in a policy doc, exceptions in an email thread, retention rules nobody remembers until an audit asks. By the time someone needs to reconstruct what happened, half the trail is gone. The approach: define roles and evidence requirements up front, review execution against those requirements, track remediation on anything that fails, and compile a certification status that rolls everything up into one place.
+Execution records go through the common validation and are checked against the control catalog in the reference file. A record whose control is no longer active in the catalog is an exception, because evidence against a retired control doesn't count. The summary counts exceptions by reason so remediation can be tracked from one period to the next.
 
 ```mermaid
 flowchart TB
@@ -37,20 +37,32 @@ flowchart TB
 
 ## Steps
 
-1. Load control execution data and the reference control catalog.
-2. Validate schema, required fields, and unique keys.
-3. Standardize identifiers, dates, statuses, and values.
-4. Apply evidence requirements per control.
-5. Separate controls with complete evidence from those needing remediation.
-6. Build the certification summary and supporting detail.
-7. Reconcile summary to accepted detail.
+1. Load execution records and the control catalog.
+2. Validate and standardize.
+3. Check each record against the catalog and its status.
+4. Route source-flagged records to review.
+5. Summarize by reason.
+6. Tie out.
+7. Carry open items forward.
 
 ## Controls
 
-- Required-field and duplicate-key validation on execution records
-- Reference completeness against the control catalog
+- Validation on execution records
+- Catalog completeness and status
 - Input-to-output count reconciliation
 - Summary-to-detail tie-out
-- One exception register for both missing evidence and control breaks
+- Single register for missing evidence and control breaks
 
-The lifecycle piece is what makes this different from a one-off control check: remediation status carries forward until it's actually closed, instead of resetting every period. Data is synthetic, built for this repo.
+Remediation status carries forward until it is closed. That is what separates a lifecycle from a one-off check.
+
+## Run it
+
+The expected output in this folder is produced by the shared pipeline, not typed in. Rerun it or check it against what's committed:
+
+```
+cd demo/case-pipeline
+python run_case.py 08 --check
+python -m unittest discover -s tests -v
+```
+
+`case.json` holds this case's logic block and parameters. `documentation/CONTROL_MATRIX.md` maps every control to where its evidence lands in the output.

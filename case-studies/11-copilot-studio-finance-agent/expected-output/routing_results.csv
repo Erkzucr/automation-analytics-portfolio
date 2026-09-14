@@ -1,0 +1,19 @@
+case_id,expected_topic,actual_topic,matched_trigger,passed
+C01,T01,T01,journal entry,True
+C02,T01,T01,manual je,True
+C03,T02,T02,recon template,True
+C04,T02,T02,open items,True
+C05,T03,T03,accrual deadline,True
+C06,T03,T03,close day,True
+C07,T04,T04,need access,True
+C08,T04,T04,submit a request,True
+C09,T05,T05,post this,True
+C10,T05,T05,approve this,True
+C11,T05,T05,change the balance,True
+C12,T05,T05,what is the stock price,True
+C13,T05,T05,tax advice for my personal,True
+C14,T99,T99,,True
+C15,T99,T99,,True
+C16,T05,T05,override,True
+C17,T02,T02,reconciling item,True
+C18,T03,T03,month-end deadline,True

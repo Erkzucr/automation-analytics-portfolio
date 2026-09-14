@@ -1,18 +1,18 @@
 # Exception Monitoring and Prioritization
 
-Having an exception report is one thing. Having one that tells the right person what to look at first is another. This case study is about the second part.
+An exception report that tells the reviewer what to look at first. Without that, the report becomes a tab that opens once a quarter.
 
 ## What this really solves
 
-Having a list of problems isn't the same as knowing which ones need attention right now. Plenty of "exception reports" are really just a spreadsheet tab nobody opens until it's too late to fix quietly. A pile of unresolved items isn't useful if nobody knows who owns each one, how old it is, or which ones actually matter.
+A list of unresolved items needs an owner, an age and a priority per item. Without them, review time goes to whatever sits at the top of the sheet.
 
 ## Business impact
 
-This turns a pile of unresolved items into a ranked list, so the team's time goes to what actually matters first, instead of getting lost figuring out where to even start.
+Review hours go to the largest items first. Small items are still logged and wait their turn.
 
 ## How it works
 
-Validated records get routed through an ownership assignment step and an age-banding calculation, and the result is a prioritized view instead of a flat list. New, unassigned, and aged-out items surface differently, so review effort goes where it's actually needed.
+After the common validation, each accepted row gets a priority band by amount, using the thresholds in `case.json`: high, medium, low. Exceptions keep their reason code so the register can be sorted by cause as well as by size. The summary counts exceptions by reason, which over several months is the trend to watch.
 
 ```mermaid
 flowchart TB
@@ -37,20 +37,32 @@ flowchart TB
 
 ## Steps
 
-1. Load source and reference data.
-2. Validate schema, required fields, and unique keys.
-3. Standardize identifiers, dates, statuses, and values.
-4. Assign owner groups and calculate age bands.
-5. Separate accepted records from items needing review.
-6. Build the prioritized monitoring view and supporting detail.
-7. Reconcile the summary back to detail.
+1. Load and validate the input.
+2. Standardize.
+3. Check reference and status.
+4. Assign a priority band to each accepted row.
+5. Route source-flagged rows to the register.
+6. Summarize by reason and by band.
+7. Tie out.
 
 ## Controls
 
 - Required-field and duplicate-key validation
-- Reference completeness checks so ownership assignment doesn't fail silently
-- Input-to-output count reconciliation
-- Summary-to-detail tie-out
-- A single exception register instead of one queue per failure type
+- Reference completeness so ownership can be assigned
+- Priority thresholds kept in configuration
+- Counts and totals reconciled input to output
+- Exception register with a reason per row and a count per reason in the summary
 
-The interesting part of this one is less the calculation and more the prioritization logic, deciding what surfaces first so review time doesn't get wasted on low-priority noise. All data is synthetic.
+The bands were set so the synthetic data produces all three, and the test checks that. In a live process the thresholds should come from the reviewer, not from the data.
+
+## Run it
+
+The expected output in this folder is produced by the shared pipeline, not typed in. Rerun it or check it against what's committed:
+
+```
+cd demo/case-pipeline
+python run_case.py 04 --check
+python -m unittest discover -s tests -v
+```
+
+`case.json` holds this case's logic block and parameters. `documentation/CONTROL_MATRIX.md` maps every control to where its evidence lands in the output.

@@ -1,0 +1,101 @@
+# Topic definitions for the Copilot Studio finance agent.
+# This is a readable summary of what's configured in Copilot Studio, kept in the repo
+# so trigger phrases and scope rules are versioned and reviewable. The evaluation
+# script reads this file to simulate routing.
+
+agent:
+  name: Finance Policy Assistant (synthetic)
+  channel: Microsoft Teams
+  knowledge_sources:
+    - sample-data/knowledge-base/SOP-001-manual-journal-entries.md
+    - sample-data/knowledge-base/SOP-002-balance-sheet-reconciliations.md
+    - sample-data/knowledge-base/SOP-003-month-end-close-calendar.md
+    - sample-data/knowledge-base/faq.csv
+  web_browsing: disabled
+  general_knowledge_answers: disabled   # answers must come from the sources above
+
+topics:
+  - id: T01
+    name: Journal entry policy
+    kind: answer_from_knowledge
+    source: SOP-001
+    triggers:
+      - journal entry
+      - manual JE
+      - JE approval
+      - who approves a journal
+      - JE threshold
+      - posting a journal
+    response_rule: Answer from SOP-001 and cite the section. If the question mentions a specific amount, state the applicable approval tier.
+
+  - id: T02
+    name: Reconciliation procedure
+    kind: answer_from_knowledge
+    source: SOP-002
+    triggers:
+      - reconciliation
+      - reconcile
+      - recon template
+      - open items
+      - aged items
+      - reconciling item
+      - balance sheet review
+    response_rule: Answer from SOP-002 and cite the section. Include the aging threshold when asked about open items.
+
+  - id: T03
+    name: Close calendar
+    kind: answer_from_knowledge
+    source: SOP-003
+    triggers:
+      - close calendar
+      - close day
+      - when is the close
+      - cutoff
+      - month-end deadline
+      - accrual deadline
+    response_rule: Answer from SOP-003 and cite the day number. Do not guess dates that aren't in the calendar.
+
+  - id: T04
+    name: Access or template request
+    kind: collect_and_call_flow
+    flow: create_request_record
+    required_fields:
+      - requester_name
+      - request_type        # access | template | other
+      - system_or_template
+      - business_justification
+    triggers:
+      - request access
+      - need access
+      - request a template
+      - open a ticket
+      - submit a request
+    response_rule: Collect all required fields, then call the flow and return the request ID. Never promise approval; the request goes to the owner.
+
+  - id: T05
+    name: Out of scope or action request
+    kind: refuse_and_escalate
+    triggers:
+      - post this
+      - approve this
+      - change the balance
+      - update the GL
+      - delete the entry
+      - override
+      - what is the stock price
+      - legal advice
+      - tax advice for my personal
+    response_rule: Use the refusal wording in guardrails.md and offer escalation to a named owner.
+
+  - id: T99
+    name: Fallback
+    kind: fallback
+    response_rule: Ask the user to rephrase once. If still unrecognized, offer escalation and log the question as unanswered.
+
+escalation:
+  owner_role: Finance process owner (synthetic)
+  what_gets_attached: conversation transcript, topic that fired, timestamp
+
+logging:
+  retained_fields: [timestamp, topic_id, resolved_flag, escalated_flag, source_cited]
+  review_cadence: weekly

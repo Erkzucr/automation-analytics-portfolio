@@ -9,3 +9,9 @@
 | category_code | Category used to route match breaks | CAT01 |
 | value_amount | Synthetic value compared across both sides | 1250.00 |
 | status_code | Match or review status | VALID |
+
+## Output-only fields
+
+| Field | Meaning | Example |
+|---|---|---|
+| exception_reason | Why a row landed in exception_records.csv | DUPLICATE_KEY |

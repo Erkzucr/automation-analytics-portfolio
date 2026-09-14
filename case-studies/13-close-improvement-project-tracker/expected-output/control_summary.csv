@@ -1,0 +1,14 @@
+control_name,control_value
+status_date,2026-09-14
+tasks,15
+milestones,5
+bac,98000.0
+pv,72071.43
+ev,58600.0
+ac,63900.0
+spi,0.81
+cpi,0.92
+eac,106863.48
+rollup_ties,PASS
+open_high_risks,2
+milestones_late_or_missed,2

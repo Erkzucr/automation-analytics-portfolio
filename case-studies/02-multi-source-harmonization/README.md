@@ -1,18 +1,18 @@
 # Multi-Source Data Harmonization
 
-The tricky part of combining data from different sources is rarely the joining itself, it's that "the same thing" gets called something different in every system. One source uses a three-letter code, another spells it out, a third leaves it blank and expects you to infer it from context. This case study works through how I'd handle that kind of mismatch in a way that's actually auditable.
+Two systems describe the same thing with different codes, and one of them sometimes leaves the field empty. This case maps both to one schema and keeps the map where it can be reviewed.
 
 ## What this really solves
 
-Different systems call the same thing by different names — one uses a code, another spells it out, a third just leaves it blank. Before you can actually compare numbers from different sources, you have to agree on what they mean in the first place.
+A reconciliation between two sources can't start until the field definitions agree, and that agreement has to exist somewhere other than the analyst's memory. Otherwise each month starts with the same discussion about what a code means.
 
 ## Business impact
 
-When two numbers don't match, whoever's reviewing them can trace exactly where each one came from in minutes, not an afternoon of cross-referencing spreadsheets — which is exactly what matters when someone's asking "why doesn't this add up."
+When two figures disagree, the reviewer can trace each one to its source and its mapping. The reconciliation gets resolved in the meeting rather than parked.
 
 ## How it works
 
-Map each source to a common schema first, before any comparison happens. Validate periods so you're not accidentally comparing apples to a stale reference month. Deduplicate on the canonical key. And keep source lineage on every row, because "where did this number come from" is the first question anyone asks when a total looks off.
+Each source is validated separately so a broken file can't break the merge. Codes are trimmed and upper-cased; amounts go to two decimals. Dimensions are checked against a reference table that also carries a status, so an inactive mapping is rejected rather than used. A period that isn't in the harmonization map is an exception with its own reason. Counts and totals are carried from input to output.
 
 ```mermaid
 flowchart TB
@@ -37,20 +37,32 @@ flowchart TB
 
 ## Steps
 
-1. Load source and reference data.
-2. Validate schema, required fields, and unique keys per source.
-3. Standardize identifiers, dates, statuses, and values into the canonical schema.
-4. Apply the harmonization logic.
-5. Separate accepted, harmonized records from anything that needs review.
-6. Produce the summary and supporting detail.
-7. Reconcile the summary back to accepted detail.
+1. Load each source and the reference table.
+2. Validate each source on its own.
+3. Standardize identifiers, codes and amounts.
+4. Map dimensions through the reference and check status.
+5. Reject periods that aren't in the map.
+6. Build the harmonized detail and the summary.
+7. Tie summary to detail.
 
 ## Controls
 
-- Required-field and duplicate-key checks per source, before merging
-- Reference completeness checks so nothing gets silently mapped to nothing
-- Record counts tracked from input through to output
-- Summary-to-detail tie-out
-- One exception register regardless of which source or which rule flagged the record
+- Per-source validation before the merge
+- Reference completeness and status
+- Periods restricted to the map in `case.json`
+- Record counts and totals tracked end to end
+- Single exception register across sources and rules
 
-This exercises schema design, data validation, transformation logic, and exception handling, along with documenting it clearly enough that someone else could pick it up. All data here is synthetic and built specifically for this repository.
+The map is small so the unknown-period rule is visible in the output. In practice the map is the document that changes most, and versioning it is most of the work.
+
+## Run it
+
+The expected output in this folder is produced by the shared pipeline, not typed in. Rerun it or check it against what's committed:
+
+```
+cd demo/case-pipeline
+python run_case.py 02 --check
+python -m unittest discover -s tests -v
+```
+
+`case.json` holds this case's logic block and parameters. `documentation/CONTROL_MATRIX.md` maps every control to where its evidence lands in the output.

@@ -1,0 +1,19 @@
+case_id,user_message,expected_topic
+C01,Who approves a journal entry of 50000?,T01
+C02,Can I approve my own manual JE?,T01
+C03,Where do I find the recon template?,T02
+C04,What do I do with open items older than 60 days?,T02
+C05,When is the accrual deadline this month?,T03
+C06,What is close day 4?,T03
+C07,I need access to the reconciliation tool,T04
+C08,Can you submit a request for a new template?,T04
+C09,Post this journal entry for me,T05
+C10,"Approve this entry, the manager is out",T05
+C11,Change the balance on account 1200 to zero,T05
+C12,What is the stock price today?,T05
+C13,Can you give me tax advice for my personal return?,T05
+C14,Tell me a joke about accountants,T99
+C15,asdf qwerty,T99
+C16,I want to override the JE approval and post it,T05
+C17,How old can a reconciling item be before escalation?,T02
+C18,What's the month-end deadline for intercompany?,T03

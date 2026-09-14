@@ -1,4 +1,4 @@
-name: Python demo tests
+name: Tests
 
 on:
   push:
@@ -11,21 +11,49 @@ permissions:
   contents: read
 
 jobs:
-  test:
+  python:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: ["3.11", "3.12"]
     steps:
       - name: Check out repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@v4
       - name: Set up Python
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Run reconciliation demo tests
+      - name: Reconciliation demo tests
         working-directory: demo/python-reconciliation-demo
+        run: |
+          python -m unittest discover -s tests -v
+          python run_demo.py
+      - name: Case pipeline tests (cases 01 to 09)
+        working-directory: demo/case-pipeline
+        run: |
+          python -m unittest discover -s tests -v
+          python run_case.py all --check
+      - name: People cost variance analysis (case 12)
+        working-directory: case-studies/12-people-cost-variance-analysis/analysis
         run: python -m unittest discover -s tests -v
-      - name: Run reconciliation demo
-        working-directory: demo/python-reconciliation-demo
-        run: python run_demo.py
+      - name: Close improvement project tracker (case 13)
+        working-directory: case-studies/13-close-improvement-project-tracker/tracker
+        run: python -m unittest discover -s tests -v
+      - name: Copilot Studio agent evaluation (case 11)
+        working-directory: case-studies/11-copilot-studio-finance-agent/evaluation
+        run: |
+          python -m unittest discover -s tests -v
+          python evaluate_agent.py
+
+  node:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: School inventory logic tests (case 10)
+        working-directory: case-studies/10-school-inventory-webapp
+        run: node --test tests/*.test.js

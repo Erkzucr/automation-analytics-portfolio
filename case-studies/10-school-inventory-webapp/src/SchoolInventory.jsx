@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { filterItems, computeStats, validateItem, upsertItem, removeItem, addRepairEntry } from "./inventoryLogic.js";
 import { Search, Plus, Music4, Package, Wrench, User, X, Trash2, Pencil, AlertTriangle, Check, History, ChevronRight } from "lucide-react";
 
 const STATUS = {
@@ -93,31 +94,22 @@ export default function SchoolInventory() {
 
   async function saveItem(e) {
     e.preventDefault();
-    if (!editing.name.trim()) return;
-    const exists = items.some((i) => i.id === editing.id);
-    const next = exists
-      ? items.map((i) => (i.id === editing.id ? editing : i))
-      : [...items, editing];
-    await persist(next);
+    if (validateItem(editing).length) return;
+    await persist(upsertItem(items, editing));
     setSelected(editing);
     setEditing(null);
   }
 
   async function deleteItem(id) {
-    await persist(items.filter((i) => i.id !== id));
+    await persist(removeItem(items, id));
     setConfirmDelete(null);
     setSelected(null);
   }
 
   async function addRepair() {
     if (!repairDraft.trim() || !selected) return;
-    const entry = {
-      date: new Date().toISOString(),
-      note: repairDraft.trim(),
-      by: coordinator || "Anónimo",
-    };
-    const updated = { ...selected, repairHistory: [entry, ...selected.repairHistory] };
-    await persist(items.map((i) => (i.id === updated.id ? updated : i)));
+    const updated = addRepairEntry(selected, repairDraft, coordinator);
+    await persist(upsertItem(items, updated));
     setSelected(updated);
     setRepairDraft("");
   }
@@ -130,19 +122,8 @@ export default function SchoolInventory() {
     );
   }
 
-  const filtered = items.filter((i) => {
-    if (catFilter !== "todos" && i.category !== catFilter) return false;
-    if (statusFilter !== "todos" && i.status !== statusFilter) return false;
-    if (search && !`${i.name} ${i.type} ${i.location}`.toLowerCase().includes(search.toLowerCase())) return false;
-    return true;
-  });
-
-  const stats = {
-    total: items.length,
-    instrumentos: items.filter((i) => i.category === "instrumento").length,
-    suministros: items.filter((i) => i.category === "suministro").length,
-    atencion: items.filter((i) => i.status === "reparacion" || i.status === "fuera").length,
-  };
+  const filtered = filterItems(items, { category: catFilter, status: statusFilter, search });
+  const stats = computeStats(items);
 
   return (
     <div className="w-full bg-stone-50 text-stone-800" style={{ fontFamily: "system-ui, sans-serif" }}>

@@ -1,0 +1,7 @@
+risk_id,workstream,description,probability,impact,response,owner_role,status,score,level
+R02,Test,Preparers unavailable during UAT because it overlaps with quarter close,4,4,Move UAT to the second week after close and confirm names now,Accounting lead,Open,16,HIGH
+R01,Build,Automation analyst is the only person who knows the matching logic,3,4,Pair with a second analyst and document as you build,Finance PM,Open,12,HIGH
+R05,Deploy,First close on the new process falls in the same week as external audit fieldwork,2,4,Agree a fallback to the manual process with the controller,Finance PM,Open,8,MEDIUM
+R04,Build,Dashboard depends on a data source that refreshes weekly not daily,3,2,Accept weekly for hypercare and log an enhancement,BI analyst,Open,6,MEDIUM
+R03,Design,Accrual policy change needs controller approval that hasn't been scheduled,2,5,Book the approval slot before design sign-off,Controls lead,Closed,10,MEDIUM
+R06,Discovery,Baseline metrics not comparable across countries,3,3,Define metrics once and reconcile definitions before baseline,Accounting lead,Closed,9,MEDIUM

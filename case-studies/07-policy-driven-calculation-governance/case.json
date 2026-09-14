@@ -1,0 +1,13 @@
+{
+  "case": "07",
+  "title": "Policy-driven calculation governance",
+  "logic": "policy_rate",
+  "parameters": {
+    "policy_rate_by_category": {
+      "CAT01": 0.0825,
+      "CAT02": 0.1,
+      "CAT03": 0.125
+    }
+  },
+  "notes": "Parameters are made up for this repo. The pipeline in demo/case-pipeline reads this file."
+}

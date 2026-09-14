@@ -1,5 +1,11 @@
 # What's next
 
-Done: nine case studies, the Python and Alteryx demos, diagrams, sample data, tests, and a 3-page Power BI dashboard (with rendered screenshots) built on the same synthetic data.
+Done: thirteen case studies at depth 5 on the written rubric, the shared case pipeline, the Python and Alteryx demos, the Copilot Studio agent with its evaluation, the variance analysis, the project tracker, the inventory app logic tests, diagrams, sample data, charts, and a 3-page Power BI dashboard on the same synthetic data.
 
-Things I might add later: a couple more case studies if I run into problems worth documenting. No rush — I'd rather keep what's here solid than pad it out.
+Probably next, in this order:
+
+- Refresh the Power BI screenshots. The data and spec already cover thirteen cases; the images still show nine.
+- A second Power Automate flow for the agent that logs questions the SOPs don't answer, so the gap list builds itself.
+- A UiPath or Power Automate Desktop demo, once there is something worth showing.
+
+No deadline on any of it. What's here should stay solid before anything gets added.

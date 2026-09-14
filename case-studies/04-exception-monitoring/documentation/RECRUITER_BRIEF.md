@@ -1,10 +1,10 @@
 # Recruiter Brief: Exception Monitoring and Prioritization
 
-**Short version:** Turning a flat exception list into a prioritized queue that tells reviewers what actually needs attention first.
+**Short version:** Turning a flat exception list into a prioritized queue that tells reviewers what needs attention first.
 
 **Situation:** Review populations get fragmented across ownership, priority, and age, so nothing gets worked in a sensible order.
 
-**Task:** Build a monitoring view that surfaces the right items first, not just a list of everything that's outstanding.
+**Task:** Build a monitoring view that surfaces the right items first instead of listing everything that's outstanding.
 
 **Action:** Validated the incoming population, assigned owner groups, calculated age bands, and built a prioritized view backed by the same exception register everything else feeds into.
 

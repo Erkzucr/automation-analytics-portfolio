@@ -1,0 +1,7 @@
+{
+  "case": "09",
+  "title": "AI-assisted knowledge capture",
+  "logic": "none",
+  "parameters": {},
+  "notes": "Parameters are made up for this repo. The pipeline in demo/case-pipeline reads this file."
+}

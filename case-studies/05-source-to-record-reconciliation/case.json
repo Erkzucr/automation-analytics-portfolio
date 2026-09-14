@@ -1,0 +1,7 @@
+{
+  "case": "05",
+  "title": "Source-to-record reconciliation",
+  "logic": "none",
+  "parameters": {},
+  "notes": "Parameters are made up for this repo. The pipeline in demo/case-pipeline reads this file."
+}

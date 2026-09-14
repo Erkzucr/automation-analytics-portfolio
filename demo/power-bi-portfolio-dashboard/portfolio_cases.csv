@@ -1,10 +1,14 @@
 case_id,capability,complexity,demonstration_depth,documented_tests,data_classification,status
-CS01,Validation,Intermediate,5,7,Synthetic,Complete
-CS02,Harmonization,Intermediate,4,7,Synthetic,Complete
-CS03,Outputs,Intermediate,4,7,Synthetic,Complete
-CS04,Monitoring,Intermediate,4,7,Synthetic,Complete
-CS05,Reconciliation,Advanced,5,7,Synthetic,Complete
-CS06,Period Analysis,Intermediate,4,7,Synthetic,Complete
-CS07,Governance,Advanced,5,7,Synthetic,Complete
-CS08,Controls,Advanced,5,7,Synthetic,Complete
-CS09,Responsible AI,Intermediate,4,7,Synthetic,Complete
+CS01,Validation,Intermediate,5,11,Synthetic,Complete
+CS02,Harmonization,Intermediate,5,11,Synthetic,Complete
+CS03,Outputs,Intermediate,5,10,Synthetic,Complete
+CS04,Monitoring,Intermediate,5,11,Synthetic,Complete
+CS05,Reconciliation,Advanced,5,10,Synthetic,Complete
+CS06,Period Analysis,Intermediate,5,11,Synthetic,Complete
+CS07,Governance,Advanced,5,11,Synthetic,Complete
+CS08,Controls,Advanced,5,10,Synthetic,Complete
+CS09,Responsible AI,Intermediate,5,10,Synthetic,Complete
+CS10,Web App,Applied,5,7,Real app without sensitive config,Complete
+CS11,AI Agent,Advanced,5,18,Synthetic,Complete
+CS12,Variance Analysis,Advanced,5,7,Synthetic,Complete
+CS13,Project Tracking,Advanced,5,7,Synthetic,Complete

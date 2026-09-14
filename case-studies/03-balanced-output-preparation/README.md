@@ -1,18 +1,18 @@
 # Balanced Output Preparation
 
-Turning detailed transaction-level records into a clean, balanced summary that still lets a reviewer drill back to the source rows.
+The last step before a summary leaves the team. It checks that the summary adds up to the detail it came from and stops when it doesn't.
 
 ## What this really solves
 
-Turning messy, detailed transaction data into a clean summary that still adds up correctly — without hiding a rounding mismatch in a footnote nobody reads.
+Under close pressure, a rounding mismatch or a dropped row becomes a footnote or a manual plug. Both hide the fact that the number doesn't tie.
 
 ## Business impact
 
-Nothing gets published unless it's been checked to actually tie out. That means a leader can trust a summary number is accurate, not just "close enough," because the detail behind it was verified before it ever went out.
+A summary can't be published without a tie-out. The reader can assume the detail was checked because the process doesn't complete otherwise.
 
 ## How it works
 
-Detail data is messy by nature: mixed signs, inconsistent precision, records that don't map cleanly to a reporting dimension. Producing an output that's actually reviewable means fixing all of that first, not just aggregating and hoping it nets out. The approach: normalize signs and rounding, assign each record to its reporting dimension, aggregate, and then check that the aggregate balances before publishing it. If it doesn't balance, that's a control exception, not a rounding footnote buried in a comment.
+Common validation runs first. Accepted rows are aggregated. The summary carries the input total, the accepted total and the exception total, and the pipeline writes PASS or FAIL for the count tie-out and the amount tie-out. A FAIL stops the publish step.
 
 ```mermaid
 flowchart TB
@@ -37,20 +37,33 @@ flowchart TB
 
 ## Steps
 
-1. Load source and reference data.
-2. Validate schema, required fields, unique keys.
-3. Standardize identifiers, dates, statuses, values.
-4. Normalize sign and precision, then aggregate.
-5. Split accepted detail from exceptions.
-6. Build the summary output.
-7. Tie summary to detail before publishing.
+1. Load and validate the detail.
+2. Standardize codes and amounts.
+3. Check dimensions against the reference.
+4. Split accepted from exceptions.
+5. Aggregate accepted rows.
+6. Tie counts and amounts from input to summary.
+7. Publish only on PASS.
 
 ## Controls
 
 - Field and key validation up front
-- Reference completeness checks
-- Input-to-output count reconciliation
-- Summary-to-detail tie-out as the final gate before publishing
-- One exception log across all failure types
+- Reference completeness
+- Count reconciliation input to output
+- Amount reconciliation input to output
+- Summary-to-detail tie-out as the gate before publishing
+- One exception log for every failure type
 
-This one's mostly about aggregation and balancing logic, plus the discipline of not publishing anything that doesn't tie out. Data is synthetic, generated for this repo.
+There is little logic here beyond the tie-out. That is the case: a summary that doesn't balance doesn't go out, and the check is automatic.
+
+## Run it
+
+The expected output in this folder is produced by the shared pipeline, not typed in. Rerun it or check it against what's committed:
+
+```
+cd demo/case-pipeline
+python run_case.py 03 --check
+python -m unittest discover -s tests -v
+```
+
+`case.json` holds this case's logic block and parameters. `documentation/CONTROL_MATRIX.md` maps every control to where its evidence lands in the output.

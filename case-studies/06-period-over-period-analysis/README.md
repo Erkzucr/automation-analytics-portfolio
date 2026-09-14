@@ -1,18 +1,18 @@
 # Period-Over-Period Analysis
 
-What changed since last period, and does the change actually make sense? That's the question this workflow is built to answer without someone eyeballing two spreadsheets side by side.
+This month against last month, with the threshold written down so the review doesn't depend on who runs it.
 
 ## What this really solves
 
-Comparing this month to last sounds simple, but doing it by hand means someone has to notice which changes are normal and which ones deserve a second look — and that judgment call shouldn't depend on who happens to be reviewing it that day.
+A movement that would surprise the controller gets found after the report is out, by the controller. The review needs a threshold applied the same way every period.
 
 ## Business impact
 
-Real variances get flagged automatically before they turn into a surprise in the report, so a controller sees a problem coming instead of explaining one after the fact.
+Large movements are flagged before the numbers leave the team, with the prior-period base attached. The explanation gets written once.
 
 ## How it works
 
-Recurring outputs need a current-versus-prior comparison almost every cycle, but doing that comparison by hand means someone has to notice which movements are normal and which ones deserve a second look. That judgment call shouldn't depend on who happens to be doing the review that month. The approach: calculate current-period values, join in the prior period, and flag movements that cross a threshold for review. Everything else flows through as accepted, with the movement calculation itself kept in the supporting output so a reviewer can see the math, not just the flag.
+After validation, the pipeline totals each dimension by period and compares each period with the previous one. Movements above an absolute threshold from `case.json` send that dimension-period to review. Accepted rows carry the movement amount so the reviewer has the context without a second query. The threshold is an amount rather than a percentage: on a small base a percentage flags everything, and an amount behaves like the materiality used in a flux review.
 
 ```mermaid
 flowchart TB
@@ -37,20 +37,32 @@ flowchart TB
 
 ## Steps
 
-1. Load current and prior-period source data.
-2. Validate schema, required fields, and unique keys.
-3. Standardize identifiers, dates, statuses, and values.
-4. Calculate current values and join prior-period values.
-5. Flag movements beyond threshold for review; pass the rest through as accepted.
-6. Build the summary and supporting output.
-7. Reconcile summary to accepted detail.
+1. Load and validate.
+2. Standardize.
+3. Total by dimension and period.
+4. Compare each period against the prior one.
+5. Flag movements above the threshold.
+6. Carry the movement amount on accepted rows.
+7. Summarize and tie out.
 
 ## Controls
 
 - Required-field and duplicate-key validation
-- Reference completeness, so the prior-period join doesn't silently fail
-- Input-to-output count reconciliation
-- Summary-to-detail tie-out
-- One exception register for both input issues and movement flags
+- Reference completeness so the comparison has a base
+- Threshold in configuration, applied the same way every period
+- Counts and totals reconciled
+- Exception register covering input issues and movement flags
 
-The threshold logic is the part worth calling out. Too tight and reviewers drown in noise; too loose and real movements slip through unflagged. Getting that balance right is as much a judgment call as a coding problem. Data is synthetic, built for this repo.
+The synthetic data has one injected movement, and the test expects it to be caught. Setting the threshold for a live process is a judgment call that belongs with the reviewer.
+
+## Run it
+
+The expected output in this folder is produced by the shared pipeline, not typed in. Rerun it or check it against what's committed:
+
+```
+cd demo/case-pipeline
+python run_case.py 06 --check
+python -m unittest discover -s tests -v
+```
+
+`case.json` holds this case's logic block and parameters. `documentation/CONTROL_MATRIX.md` maps every control to where its evidence lands in the output.

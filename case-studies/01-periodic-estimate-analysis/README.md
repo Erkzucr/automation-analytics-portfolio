@@ -1,18 +1,18 @@
 # Periodic Estimate Analysis
 
-Every close cycle has some kind of recurring estimate that gets rebuilt from scratch each period, usually from two or three files that don't quite agree on formatting. I built this case study to show how I'd turn that into a controlled, repeatable workflow instead of a spreadsheet someone rebuilds by hand every month.
+A recurring estimate rebuilt every month from two or three files that don't agree on formatting. The workflow here validates the inputs, applies one reasonableness rule, and refuses to publish a summary that doesn't tie to its detail.
 
 ## What this really solves
 
-Every closing period, someone has to rebuild a recurring estimate from two or three files that never quite agree. When those files drift — a renamed field, a missing row, a typo in a status code — the mistake usually isn't caught until someone's already working off the wrong number.
+A renamed field, a missing row or a status code with a trailing space doesn't stop a spreadsheet from producing a number. The error surfaces later, after someone has used the figure.
 
 ## Business impact
 
-This catches bad data before it becomes a bad number. Leadership gets an estimate they can trust without double-checking it every month, and the process doesn't depend on one specific person remembering to look closely.
+Rows that fail validation stop before the calculation. Whoever signs the estimate can see what was excluded and why, and the check runs the same way when the usual preparer is out.
 
 ## How it works
 
-The workflow validates schema and completeness before anything else runs, standardizes the fields it needs, applies the calculation logic, and then splits the results into two buckets: accepted records and records that need a human to look at them. Nothing gets silently dropped. Everything that doesn't pass validation lands in an exception register with enough context to explain why.
+Each input is validated on its own, then standardized so the match compares values and not spacing. Rows that pass go through the estimate rule: an amount above the ceiling for its category goes to review. Accepted rows feed a summary that must tie to the detail before publishing. Every rejected row lands in one exception register with a reason code.
 
 ```mermaid
 flowchart TB
@@ -37,22 +37,32 @@ flowchart TB
 
 ## Steps
 
-1. Load the source and reference data.
-2. Check schema, required fields, and duplicate keys.
-3. Standardize identifiers, dates, statuses, and values so downstream logic isn't guessing at formats.
-4. Run the calculation logic.
-5. Split accepted records from exceptions.
-6. Build the summary and supporting detail.
-7. Tie the summary back to the accepted detail before publishing anything.
+1. Load the primary and reference files.
+2. Check required fields, unique keys and that amounts parse.
+3. Standardize codes and amounts.
+4. Check each dimension against the reference and its status.
+5. Apply the category ceiling.
+6. Split accepted from exceptions and build the summary.
+7. Tie the summary to the accepted detail.
 
 ## Controls
 
-- Required fields and duplicate keys get caught before they touch the calculation
-- Reference data is checked for completeness, not just existence
-- Input counts reconcile to accepted-plus-exception counts, so nothing silently disappears
-- Summary output ties to detail before it goes out the door
-- Every exception, regardless of source, lands in one register instead of three different places
+- Required fields and duplicate keys rejected before calculation
+- Reference lookup includes status; an inactive dimension is an exception
+- Input count equals accepted plus exceptions, in rows and in amount
+- Summary ties to detail before publishing
+- One exception register with a reason per row
 
-Skills this exercises: workflow design, data validation, exception handling, control design, and writing it up in a way a reviewer could actually follow.
+The ceiling in `case.json` and the data are synthetic. The tests are what show the workflow holds when the inputs are bad.
 
-The data here is fully synthetic, generated for this repository. There's no real employer process, dataset, or proprietary logic behind it.
+## Run it
+
+The expected output in this folder is produced by the shared pipeline, not typed in. Rerun it or check it against what's committed:
+
+```
+cd demo/case-pipeline
+python run_case.py 01 --check
+python -m unittest discover -s tests -v
+```
+
+`case.json` holds this case's logic block and parameters. `documentation/CONTROL_MATRIX.md` maps every control to where its evidence lands in the output.

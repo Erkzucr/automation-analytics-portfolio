@@ -1,0 +1,13 @@
+{
+  "case": "13",
+  "title": "Close improvement project tracker",
+  "logic": "earned_value",
+  "parameters": {
+    "status_date": "2026-09-14",
+    "spi_cpi_warning": 0.95,
+    "spi_cpi_critical": 0.85,
+    "risk_high_score": 12,
+    "risk_medium_score": 6
+  },
+  "notes": "Dates, costs and roles are made up for this repo. tracker/project_tracker.py reads this file."
+}

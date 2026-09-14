@@ -9,3 +9,10 @@
 | category_code | Category the movement is analyzed within | CAT01 |
 | value_amount | Synthetic period value | 1250.00 |
 | status_code | Review status after threshold check | VALID |
+
+## Output-only fields
+
+| Field | Meaning | Example |
+|---|---|---|
+| exception_reason | Why a row landed in exception_records.csv | DUPLICATE_KEY |
+| movement_amount | Change in the dimension's total vs the prior period | 1234.50 |

@@ -1,18 +1,18 @@
 # AI-Assisted Knowledge Capture
 
-This one's a bit different from the rest, it's about using AI as part of the documentation process itself, and being explicit about where the human review sits.
+Using AI inside the documentation process, with the review step stated rather than assumed.
 
 ## What this really solves
 
-When only one person really understands how a process works, that knowledge is one resignation away from disappearing. Ask two different people to explain the same process and you'll usually get two different answers — one gives you a narrative, the other a bullet list missing half the exceptions.
+When one person is the only one who knows how a process works, that knowledge leaves with them. Two people asked to describe the same process produce different documents with different exceptions.
 
 ## Business impact
 
-Using AI to draft documentation — always checked against the real source before anyone trusts it — makes process knowledge less dependent on any single person, so handoffs and transitions don't start from zero.
+An AI draft, checked against the source before anyone relies on it, makes process knowledge less dependent on one person. A handover doesn't start from zero.
 
 ## How it works
 
-AI can help draft a consistent writeup fast, but only if the draft gets checked against the actual source material before anyone trusts it. The approach: start from a synthetic transcript, draft a writeup using a standard prompt, then verify the draft against the source line by line rather than taking it at face value. A human reviews it, and the final version gets versioned so you can see what changed between drafts. The AI drafts; it doesn't get the last word.
+Start from a synthetic transcript. Draft a write-up with a standard prompt. Verify the draft against the source line by line. A person reviews it. The final version is kept with its draft so the changes are visible. In the pipeline this appears as a review flag: anything unverified goes to the register.
 
 ```mermaid
 flowchart TB
@@ -38,19 +38,31 @@ flowchart TB
 ## Steps
 
 1. Load the synthetic transcript and reference material.
-2. Validate schema and completeness of the source content.
+2. Validate schema and completeness.
 3. Standardize terminology and structure.
-4. Draft the writeup using a standard prompt.
-5. Verify the draft against source; anything unverified goes to review.
-6. Produce the reviewed summary and supporting detail.
-7. Reconcile the final version back to what was actually verified.
+4. Draft with a standard prompt.
+5. Verify against source; unverified content goes to review.
+6. Produce the reviewed summary.
+7. Reconcile the final to what was verified.
 
 ## Controls
 
-- Source completeness checks before drafting starts
-- Line-by-line verification of AI-drafted content against source
-- Human review as a required gate, not optional
-- Version tracking between draft and final
-- One exception register for anything that couldn't be verified
+- Source completeness checked before drafting
+- Line-by-line verification of AI-drafted content
+- Human review as a required gate
+- Version kept between draft and final
+- One register for anything unverified
 
-The point of this case study is less the workflow diagram and more the principle behind it: AI output is a draft, always, and the review step is where accountability actually lives. Everything here, including the transcript, is synthetic.
+AI output is a draft. The review step is where accountability sits.
+
+## Run it
+
+The expected output in this folder is produced by the shared pipeline, not typed in. Rerun it or check it against what's committed:
+
+```
+cd demo/case-pipeline
+python run_case.py 09 --check
+python -m unittest discover -s tests -v
+```
+
+`case.json` holds this case's logic block and parameters. `documentation/CONTROL_MATRIX.md` maps every control to where its evidence lands in the output.

@@ -22,3 +22,6 @@ private/
 *.yxwz
 *.yxzp
 !demo/alteryx-reconciliation-demo/Synthetic_Reconciliation_Demo.yxmd
+__pycache__/
+node_modules/
+package-lock.json

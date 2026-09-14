@@ -9,3 +9,10 @@
 | category_code | Exception category | CAT01 |
 | value_amount | Synthetic value associated with the item | 1250.00 |
 | status_code | Review status | VALID |
+
+## Output-only fields
+
+| Field | Meaning | Example |
+|---|---|---|
+| exception_reason | Why a row landed in exception_records.csv | DUPLICATE_KEY |
+| priority | Review priority band on accepted rows | HIGH |

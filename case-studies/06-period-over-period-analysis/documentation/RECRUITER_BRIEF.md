@@ -8,4 +8,4 @@
 
 **Action:** Calculated current values, joined prior-period values, and applied a threshold to separate normal movement from anything that needs review.
 
-**Result:** A repeatable movement-analysis pattern, with the underlying math visible in the supporting output, not just a flag.
+**Result:** A repeatable movement-analysis pattern, with the math visible in the supporting output, not just a flag.

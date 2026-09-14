@@ -1,0 +1,6 @@
+question,answer,source
+Where is the reconciliation template?,In the shared reconciliation library. Use the standard template only.,SOP-002 2.1
+Can I approve my own journal entry?,No. The preparer can never approve their own entry.,SOP-001 3.4
+What happens to a reconciling item older than 90 days?,It is escalated to the controller and considered for write-off or adjustment.,SOP-002 4.2
+When is the accrual deadline?,End of close day 2.,SOP-003
+Who approves a journal entry of 50000?,Entries above 10000 and up to 100000 are approved by the accounting manager.,SOP-001 3.2

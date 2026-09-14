@@ -1,0 +1,6 @@
+task_id,milestone,planned_date,actual_date,state,slip_days,owner_role
+T03,Sign off scope and success criteria,2026-07-22,2026-07-23,ACHIEVED_LATE,1,Sponsor
+T06,Design review and control sign-off,2026-08-19,2026-08-21,ACHIEVED_LATE,2,Controls lead
+T10,Build complete and UAT ready,2026-09-18,,ON_TRACK,0,Finance PM
+T13,Go/no-go decision,2026-10-08,,ON_TRACK,0,Sponsor
+T15,Lessons learned and handover to process owner,2026-10-23,,ON_TRACK,0,Finance PM

@@ -11,3 +11,9 @@ Field reference for the sample input files. Everything is synthetic, so the "mea
 | category_code | Category used to apply calculation logic | CAT01 |
 | value_amount | Randomly generated demo value | 1250.00 |
 | status_code | Processing status assigned during validation | VALID |
+
+## Output-only fields
+
+| Field | Meaning | Example |
+|---|---|---|
+| exception_reason | Why a row landed in exception_records.csv | DUPLICATE_KEY |

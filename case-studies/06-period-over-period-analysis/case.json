@@ -1,0 +1,9 @@
+{
+  "case": "06",
+  "title": "Period-over-period analysis",
+  "logic": "period_movement",
+  "parameters": {
+    "movement_threshold_amount": 5000
+  },
+  "notes": "Parameters are made up for this repo. The pipeline in demo/case-pipeline reads this file."
+}

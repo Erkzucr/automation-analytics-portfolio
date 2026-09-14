@@ -1,0 +1,16 @@
+task_id,workstream,task_name,milestone_flag,owner_role,bac,pv,ev,ac,sv,cv,spi,cpi,schedule_status,cost_status
+T01,Discovery,Map current close calendar and owners,N,Finance PM,4000.0,4000.0,4000.0,3800.0,0.0,200.0,1.0,1.05,GREEN,GREEN
+T02,Discovery,"Baseline close metrics (days, late tasks, post-close JEs)",N,Accounting lead,6000.0,6000.0,6000.0,6900.0,0.0,-900.0,1.0,0.87,GREEN,AMBER
+T03,Discovery,Sign off scope and success criteria,Y,Sponsor,1500.0,1500.0,1500.0,1500.0,0.0,0.0,1.0,1.0,GREEN,GREEN
+T04,Design,Redesign accrual cutoff and estimate policy,N,Accounting lead,9000.0,9000.0,9000.0,9800.0,0.0,-800.0,1.0,0.92,GREEN,AMBER
+T05,Design,Design reconciliation automation and exception routing,N,Automation analyst,12000.0,12000.0,12000.0,13200.0,0.0,-1200.0,1.0,0.91,GREEN,AMBER
+T06,Design,Design review and control sign-off,Y,Controls lead,2000.0,2000.0,2000.0,2200.0,0.0,-200.0,1.0,0.91,GREEN,AMBER
+T07,Build,Build recurring JE automation,N,Automation analyst,15000.0,15000.0,10500.0,11000.0,-4500.0,-500.0,0.7,0.95,RED,GREEN
+T08,Build,Build reconciliation matching and exception register,N,Automation analyst,18000.0,16071.43,10800.0,12500.0,-5271.43,-1700.0,0.67,0.86,RED,AMBER
+T09,Build,Build close dashboard,N,BI analyst,8000.0,6500.0,2800.0,3000.0,-3700.0,-200.0,0.43,0.93,RED,AMBER
+T10,Build,Build complete and UAT ready,Y,Finance PM,500.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,GREEN,GREEN
+T11,Test,UAT with preparers and reviewers,N,Accounting lead,7000.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,GREEN,GREEN
+T12,Test,Control walkthrough with internal audit,N,Controls lead,3000.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,GREEN,GREEN
+T13,Test,Go/no-go decision,Y,Sponsor,500.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,GREEN,GREEN
+T14,Deploy,First close on the new process (hypercare),N,Finance PM,9000.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,GREEN,GREEN
+T15,Deploy,Lessons learned and handover to process owner,Y,Finance PM,2500.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,GREEN,GREEN

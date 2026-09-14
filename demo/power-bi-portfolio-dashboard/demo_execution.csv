@@ -1,3 +1,8 @@
 demo_name,technology,accepted_count,exception_count,test_status,data_classification
 Reconciliation Demo,Python,2,3,Passed,Synthetic
 Reconciliation Demo,Alteryx,3,3,User Confirmed,Synthetic
+Agent Routing Evaluation,Copilot Studio (Python simulation),18,0,Passed,Synthetic
+Case Pipeline (01-09),Python,152,77,Passed,Synthetic
+Inventory Logic Tests,Node,6,0,Passed,Synthetic fixtures
+Variance Analysis (case 12),Python,99,9,Passed,Synthetic
+Project Tracker (case 13),Python,13,2,Passed,Synthetic

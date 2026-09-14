@@ -17,7 +17,7 @@ A small, self-contained Alteryx workflow with the sample records built right int
 
 ## Tools used
 
-Text Input, Join, Formula, Filter, Browse — nothing exotic, just enough to show the matching and exception logic clearly.
+Text Input, Join, Formula, Filter, Browse. Nothing exotic, just enough to show the matching and exception logic clearly.
 
 All records are made up for this demo. No production data, external connections, or references to any real organization.
 

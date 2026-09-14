@@ -1,8 +1,8 @@
 # Recruiter Brief: Source-to-Record Reconciliation
 
-**Short version:** Matching two independently generated datasets and being deliberate about what happens to everything that doesn't match.
+**Short version:** Matching two independently generated datasets and deciding what happens to everything that doesn't match.
 
-**Situation:** Source and record-of-truth datasets that should agree, but differ due to formatting, timing, or genuine breaks.
+**Situation:** Source and record-of-truth datasets that should agree, but differ because of formatting, timing, or actual breaks.
 
 **Task:** Reconcile the two without hiding unmatched records behind an inner join.
 

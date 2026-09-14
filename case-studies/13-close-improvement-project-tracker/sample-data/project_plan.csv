@@ -1,0 +1,16 @@
+task_id,workstream,task_name,planned_start,planned_end,actual_start,actual_end,planned_cost,actual_cost,percent_complete,milestone_flag,owner_role
+T01,Discovery,Map current close calendar and owners,2026-07-01,2026-07-10,2026-07-01,2026-07-09,4000,3800,100,N,Finance PM
+T02,Discovery,"Baseline close metrics (days, late tasks, post-close JEs)",2026-07-06,2026-07-17,2026-07-07,2026-07-20,6000,6900,100,N,Accounting lead
+T03,Discovery,Sign off scope and success criteria,2026-07-20,2026-07-22,2026-07-22,2026-07-23,1500,1500,100,Y,Sponsor
+T04,Design,Redesign accrual cutoff and estimate policy,2026-07-23,2026-08-07,2026-07-24,2026-08-12,9000,9800,100,N,Accounting lead
+T05,Design,Design reconciliation automation and exception routing,2026-07-27,2026-08-14,2026-07-28,2026-08-18,12000,13200,100,N,Automation analyst
+T06,Design,Design review and control sign-off,2026-08-17,2026-08-19,2026-08-19,2026-08-21,2000,2200,100,Y,Controls lead
+T07,Build,Build recurring JE automation,2026-08-20,2026-09-10,2026-08-24,,15000,11000,70,N,Automation analyst
+T08,Build,Build reconciliation matching and exception register,2026-08-20,2026-09-17,2026-08-24,,18000,12500,60,N,Automation analyst
+T09,Build,Build close dashboard,2026-09-01,2026-09-17,2026-09-03,,8000,3000,35,N,BI analyst
+T10,Build,Build complete and UAT ready,2026-09-18,2026-09-18,,,500,0,0,Y,Finance PM
+T11,Test,UAT with preparers and reviewers,2026-09-21,2026-10-02,,,7000,0,0,N,Accounting lead
+T12,Test,Control walkthrough with internal audit,2026-10-05,2026-10-07,,,3000,0,0,N,Controls lead
+T13,Test,Go/no-go decision,2026-10-08,2026-10-08,,,500,0,0,Y,Sponsor
+T14,Deploy,First close on the new process (hypercare),2026-10-12,2026-10-20,,,9000,0,0,N,Finance PM
+T15,Deploy,Lessons learned and handover to process owner,2026-10-21,2026-10-23,,,2500,0,0,Y,Finance PM

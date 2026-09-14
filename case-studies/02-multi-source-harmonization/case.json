@@ -1,0 +1,14 @@
+{
+  "case": "02",
+  "title": "Multi-source harmonization",
+  "logic": "period_allowlist",
+  "parameters": {
+    "allowed_periods": [
+      "P01",
+      "P02",
+      "P03",
+      "P04"
+    ]
+  },
+  "notes": "Parameters are made up for this repo. The pipeline in demo/case-pipeline reads this file."
+}

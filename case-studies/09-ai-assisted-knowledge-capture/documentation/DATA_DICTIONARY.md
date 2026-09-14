@@ -9,3 +9,9 @@
 | category_code | Content category | CAT01 |
 | value_amount | Synthetic value used to demonstrate control totals | 1250.00 |
 | status_code | Verification or review status | VALID |
+
+## Output-only fields
+
+| Field | Meaning | Example |
+|---|---|---|
+| exception_reason | Why a row landed in exception_records.csv | DUPLICATE_KEY |

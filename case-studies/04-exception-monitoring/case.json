@@ -1,0 +1,18 @@
+{
+  "case": "04",
+  "title": "Exception monitoring and prioritization",
+  "logic": "priority",
+  "parameters": {
+    "priority_bands": [
+      [
+        4000,
+        "HIGH"
+      ],
+      [
+        2000,
+        "MEDIUM"
+      ]
+    ]
+  },
+  "notes": "Parameters are made up for this repo. The pipeline in demo/case-pipeline reads this file."
+}

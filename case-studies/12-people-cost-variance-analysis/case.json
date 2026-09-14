@@ -1,0 +1,10 @@
+{
+  "case": "12",
+  "title": "People cost variance analysis",
+  "logic": "variance_decomposition",
+  "parameters": {
+    "material_amount": 15000,
+    "material_pct": 5.0
+  },
+  "notes": "Thresholds are made up for this repo. analysis/variance_analysis.py reads this file."
+}
